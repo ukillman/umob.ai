@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>咨询 | umob.ai</title>
+    <meta name="description" content="umob.ai 咨询页面，预约产品演示、升级评估与行业方案交流。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb bg-orb-a"></div>
+    <div class="bg-orb bg-orb-b"></div>
+    <header class="site-header">
+      <div class="top-strip">优破案 3.0 已发布 · umob.ai 4.0 即将发布</div>
+      <nav class="navbar container">
+        <a class="brand" href="index.html" aria-label="umob.ai 首页">
+          <span class="brand-mark">u</span>
+          <span>umob.ai</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-label="打开导航菜单" aria-expanded="false">
+          <span></span>
+          <span></span>
+        </button>
+        <div class="nav-links">
+          <a href="index.html">首页</a>
+          <a href="solutions.html">产品及解决方案</a>
+          <a href="support.html">技术支持</a>
+          <a href="consulting.html">咨询</a>
+          <a href="about.html">关于我们</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="page-hero reveal">
+        <p class="eyebrow">Consulting</p>
+        <h1>咨询</h1>
+        <p>预约产品演示、版本升级评估与行业方案交流。提交后我们会在 1 个工作日内联系你。</p>
+      </section>
+
+      <section class="section-space consult-layout">
+        <form class="consult-form reveal">
+          <label>
+            姓名
+            <input type="text" name="name" placeholder="请输入姓名" required />
+          </label>
+          <label>
+            公司 / 机构
+            <input type="text" name="organization" placeholder="请输入公司或机构名称" required />
+          </label>
+          <label>
+            联系方式
+            <input type="text" name="contact" placeholder="手机号或邮箱" required />
+          </label>
+          <label>
+            关注方向
+            <select name="focus" required>
+              <option value="">请选择</option>
+              <option value="product-demo">产品演示</option>
+              <option value="upgrade-plan">3.0 到 4.0 升级</option>
+              <option value="industry-solution">行业解决方案</option>
+              <option value="deployment">部署与实施</option>
+            </select>
+          </label>
+          <label>
+            需求说明
+            <textarea name="details" rows="5" placeholder="请描述你的业务场景与目标"></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">提交咨询</button>
+        </form>
+
+        <aside class="consult-aside reveal">
+          <h3>你将获得</h3>
+          <ul class="bullet-list">
+            <li>产品能力与演示安排建议</li>
+            <li>匹配业务场景的实施路径建议</li>
+            <li>优破案 3.0 到 umob.ai 4.0 升级参考方案</li>
+          </ul>
+          <div class="contact-block">
+            <p>商务咨询</p>
+            <strong>consult@umob.ai</strong>
+          </div>
+          <div class="contact-block">
+            <p>技术支持</p>
+            <strong>support@umob.ai</strong>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand footer-brand" href="index.html">
+            <span class="brand-mark">u</span>
+            <span>umob.ai</span>
+          </a>
+          <p>优莫百破产案件管理系统官网升级版本</p>
+        </div>
+        <div>
+          <p class="footer-title">导航</p>
+          <a href="index.html">首页</a>
+          <a href="solutions.html">产品及解决方案</a>
+          <a href="support.html">技术支持</a>
+          <a href="consulting.html">咨询</a>
+          <a href="about.html">关于我们</a>
+        </div>
+        <div>
+          <p class="footer-title">联系</p>
+          <p>商务咨询：consult@umob.ai</p>
+          <p>技术支持：support@umob.ai</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
