@@ -44,90 +44,180 @@
     </header>
 
     <main>
-      <section class="hero container">
+      <section class="hero hero-api container">
         <div class="hero-copy reveal">
-          <p class="eyebrow">面向 AI 产品和业务升级</p>
-          <h1>umob.ai 4.0<br />破产案件管理进入智能协同时代</h1>
+          <p class="eyebrow">在 umob.ai 平台上开发行业级 AI 能力</p>
+          <h1>优破案 4.0（umob.ai 4.0）<br />让案件流程进入智能体时代</h1>
           <p class="lead">
-            umob.ai 是 www.umobai.com 的升级版本官网，聚焦行业解决方案。核心产品优莫百破产案件管理系统（优破案）已发布
-            3.0，4.0 版本将以 <strong>umob.ai 4.0</strong> 命名发布。
+            umob.ai 是 www.umobai.com 的升级官网。我们以优莫百破产案件管理系统为核心，提供从流程管理、数据治理到 AI
+            智能体落地的一体化能力，帮助管理人机构、法院与金融机构更快进入下一代业务协同模式。
           </p>
           <div class="cta-group">
-            <a class="btn btn-primary" href="consulting.html">预约产品咨询</a>
-            <a class="btn btn-secondary" href="solutions.html">查看解决方案</a>
+            <a class="btn btn-primary" href="consulting.html">联系销售团队</a>
+            <a class="btn btn-secondary" href="solutions.html">开始构建方案</a>
           </div>
-          <div class="meta-row">
-            <span>覆盖破产管理人、法院、金融机构</span>
-            <span>支持本地化和私有化部署</span>
+          <div class="hero-mini-grid">
+            <article class="mini-metric">
+              <p>当前版本</p>
+              <strong>优破案 3.0</strong>
+            </article>
+            <article class="mini-metric">
+              <p>即将发布</p>
+              <strong>umob.ai 4.0</strong>
+            </article>
+            <article class="mini-metric">
+              <p>部署方式</p>
+              <strong>私有化 / 本地化</strong>
+            </article>
           </div>
         </div>
-        <aside class="hero-panel reveal">
-          <p class="panel-title">产品发布节奏</p>
-          <div class="release-card">
-            <span class="release-tag">已发布</span>
-            <h3>优破案 3.0</h3>
-            <p>稳定流程引擎 + 实战级案件协同能力</p>
-          </div>
-          <div class="release-card">
-            <span class="release-tag upcoming">即将发布</span>
-            <h3>umob.ai 4.0</h3>
-            <p>AI 案件助手 + 证据图谱 + 智能风控建议</p>
+        <aside class="hero-panel api-preview reveal">
+          <p class="panel-title">快速开始 · API 示例</p>
+          <div class="api-window">
+            <div class="api-window-head">
+              <span></span>
+              <span></span>
+              <span></span>
+              <p>Case Copilot Runtime</p>
+            </div>
+            <pre><code>POST /v1/agents/run
+{
+  "agent": "case-copilot-4.0",
+  "task": "generate-risk-brief",
+  "case_id": "PK-2026-0142",
+  "input": {
+    "creditor_claims": 132,
+    "asset_disposal_stage": "in_progress"
+  }
+}</code></pre>
+            <div class="api-window-foot">
+              <span>Latency: 1.2s</span>
+              <span>Status: Success</span>
+            </div>
           </div>
         </aside>
       </section>
 
       <section class="container section-space">
         <div class="section-head reveal">
-          <p class="eyebrow">核心价值</p>
-          <h2>为复杂案件提供可落地的智能管理能力</h2>
+          <p class="eyebrow">一站式智能体平台</p>
+          <h2>更快地构建、部署并优化可投入生产的行业智能体</h2>
         </div>
-        <div class="card-grid three">
-          <article class="info-card reveal">
-            <h3>案件全生命周期管理</h3>
-            <p>统一管理立案、债权申报、资产处置、分配清算等全流程，形成可追踪的执行闭环。</p>
+        <div class="process-grid">
+          <article class="process-card reveal">
+            <p class="process-index">01</p>
+            <h3>构建</h3>
+            <p>通过案件模板、知识库和角色配置，快速搭建符合业务流程的智能体工作流。</p>
           </article>
-          <article class="info-card reveal">
-            <h3>AI 驱动决策支持</h3>
-            <p>通过知识图谱和模型分析，为风险识别、处置策略和时效优先级给出可解释建议。</p>
+          <article class="process-card reveal">
+            <p class="process-index">02</p>
+            <h3>部署</h3>
+            <p>支持私有化环境上线，提供权限控制、审计日志和节点策略，保障生产可控性。</p>
           </article>
-          <article class="info-card reveal">
-            <h3>多方协同与合规审计</h3>
-            <p>支持多角色权限体系、流程留痕、审计日志与关键节点预警，满足监管和内控要求。</p>
+          <article class="process-card reveal">
+            <p class="process-index">03</p>
+            <h3>优化</h3>
+            <p>通过评测看板、提示优化与迭代反馈，持续提升案件处理效率与决策质量。</p>
           </article>
         </div>
       </section>
 
       <section class="container section-space">
         <div class="section-head reveal">
-          <p class="eyebrow">行业解决方案</p>
-          <h2>围绕“数据、流程、协同、风险”打造实战方案</h2>
+          <p class="eyebrow">由前沿能力驱动</p>
+          <h2>面向真实案件场景的核心模块</h2>
         </div>
         <div class="card-grid three">
-          <article class="solution-card reveal">
-            <h3>管理人机构方案</h3>
-            <p>面向破产管理人团队，提升案件推进效率与跨项目协作能力。</p>
-            <a href="solutions.html">了解更多</a>
+          <article class="info-card reveal">
+            <h3>AI 案件助手</h3>
+            <p>自动摘要材料、回答业务问题、生成节点建议，缩短关键决策链路。</p>
           </article>
-          <article class="solution-card reveal">
-            <h3>法院协同方案</h3>
-            <p>对接司法流程和文书规范，建立审理进度透明化与节点可视化能力。</p>
-            <a href="solutions.html">了解更多</a>
+          <article class="info-card reveal">
+            <h3>证据链图谱</h3>
+            <p>自动关联债权、资产、主体和文书，帮助团队快速识别潜在风险与线索。</p>
           </article>
-          <article class="solution-card reveal">
-            <h3>金融机构风控方案</h3>
-            <p>针对银行、AMC 等机构构建破产案件资产价值评估和处置策略支持体系。</p>
-            <a href="solutions.html">了解更多</a>
+          <article class="info-card reveal">
+            <h3>风控评估引擎</h3>
+            <p>对处置策略、进度偏差和合规风险进行量化评估，给出可解释的建议输出。</p>
           </article>
         </div>
       </section>
 
-      <section class="container section-space cta-band reveal">
-        <div>
-          <p class="eyebrow">开始升级</p>
-          <h2>从优破案 3.0 平滑升级到 umob.ai 4.0</h2>
-          <p>我们提供迁移评估、试点方案与实施支持，帮助你在可控周期内完成升级。</p>
+      <section class="container section-space">
+        <div class="section-head reveal">
+          <p class="eyebrow">应用场景</p>
+          <h2>由我们平台驱动的业务能力</h2>
         </div>
-        <a class="btn btn-primary" href="consulting.html">获取升级建议</a>
+        <div class="usecase-grid">
+          <article class="usecase-card reveal">
+            <h3>债权审核</h3>
+            <p>快速比对债权材料与申报逻辑，降低人工复核压力。</p>
+          </article>
+          <article class="usecase-card reveal">
+            <h3>文书生成</h3>
+            <p>基于模板和案件上下文生成标准化文书，提升输出一致性。</p>
+          </article>
+          <article class="usecase-card reveal">
+            <h3>资产处置建议</h3>
+            <p>结合资产状态与历史经验给出处置优先级和路径参考。</p>
+          </article>
+          <article class="usecase-card reveal">
+            <h3>案件风险雷达</h3>
+            <p>实时发现流程滞后、材料缺失和协作断点，支持提前干预。</p>
+          </article>
+          <article class="usecase-card reveal">
+            <h3>多方协同沟通</h3>
+            <p>面向管理人、法院、债权人和机构方建立统一事项协作面板。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section-space">
+        <div class="section-head reveal">
+          <p class="eyebrow">企业级能力</p>
+          <h2>适用于大规模运营的安全与管理控制</h2>
+        </div>
+        <div class="enterprise-grid">
+          <article class="enterprise-card reveal">
+            <h3>安全与隐私</h3>
+            <ul class="bullet-list">
+              <li>数据传输与静态加密，满足企业安全基线</li>
+              <li>支持零数据保留策略与数据驻留控制</li>
+              <li>多因子认证与 IP 白名单策略</li>
+            </ul>
+          </article>
+          <article class="enterprise-card reveal">
+            <h3>管理控制</h3>
+            <ul class="bullet-list">
+              <li>基于角色的权限管理与流程授权</li>
+              <li>项目维度的成本和使用量可视化</li>
+              <li>关键操作审计留痕与报表追踪</li>
+            </ul>
+          </article>
+          <article class="enterprise-card reveal">
+            <h3>专家支持</h3>
+            <ul class="bullet-list">
+              <li>方案架构师与实施顾问联合交付</li>
+              <li>升级评估、灰度试点与迁移支持</li>
+              <li>持续优化建议与专项训练服务</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section-space dual-cta">
+        <article class="dual-cta-card reveal">
+          <p class="eyebrow">开始使用</p>
+          <h3>与我们制定 AI 升级策略</h3>
+          <p>我们将根据你的组织规模、流程复杂度和交付目标给出分阶段升级路线。</p>
+          <a class="btn btn-primary" href="consulting.html">联系销售团队</a>
+        </article>
+        <article class="dual-cta-card reveal">
+          <p class="eyebrow">自主构建</p>
+          <h3>从现有产品能力快速启动</h3>
+          <p>优先接入优破案 3.0 能力，再平滑迁移至 umob.ai 4.0，降低改造风险。</p>
+          <a class="btn btn-secondary" href="solutions.html">查看产品及解决方案</a>
+        </article>
       </section>
     </main>
 
