@@ -316,7 +316,7 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
     <div style="max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,28px)">
       <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:22px">优先接入</div>
       <h2 style="margin:0 0 14px;font-size:clamp(26px,3.4vw,38px);font-weight:300;letter-spacing:.04em;line-height:1.45">首批五项能力，邀请制内测中。</h2>
-      <p style="color:#A1A1AA;font-size:17px;font-weight:300;max-width:660px;margin:20px auto 0;text-wrap:pretty">首批 <span data-txt="batch"></span> 位，面向正在办案的破产管理人。在下面填一份申请，我们逐份看，短信回你。</p>
+      <p style="color:#A1A1AA;font-size:17px;font-weight:300;max-width:660px;margin:20px auto 0;text-wrap:pretty">首批 <span data-txt="batch"></span> 位，面向正在办案的破产管理人。名额优先给正在使用优破案的机构，留个联系方式即可。</p>
       <button type="button" data-on-click="openApply" style="display:inline-block;margin-top:44px;padding:14px 40px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:14px;letter-spacing:.16em;cursor:pointer;transition:all .25s" style-hover="background:#D4A24C;color:#08090B">优破案用户优先开通</button>
     </div>
   </section>
@@ -335,9 +335,9 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
 
         <div data-if="stepGate">
           <div style="animation:fade .3s ease">
-            <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:14px">申请内测资格</div>
+            <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:14px">内测名单登记</div>
             <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">首批 <span data-txt="batch"></span> 位。</h3>
-            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">内测面向正在办案的破产管理人。名额很少，我们想把它放在能给出真实反馈的地方。</p>
+            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">内测面向正在办案的破产管理人，名额优先给正在使用优破案的机构。留个联系方式，开放时通知你。</p>
             <div style="font-size:16px;color:#F4F4F5;margin:26px 0 16px;letter-spacing:.03em">你目前是否担任破产管理人？</div>
             <div style="display:flex;gap:10px;flex-wrap:wrap">
               <button type="button" data-on-click="goForm" style="padding:12px 24px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .2s" style-hover="background:#D4A24C;color:#08090B">是，我正在办案</button>
@@ -388,10 +388,25 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
               </select>
             </div>
             <div style="margin-top:18px">
+              <label style="display:block;font-size:12px;color:#71717A;letter-spacing:.1em;margin-bottom:7px">是否正在使用优破案</label>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button type="button" data-on-click="pickCmaxYes" data-style="cmaxYesStyle">是，我们所在用</button>
+                <button type="button" data-on-click="pickCmaxNo" data-style="cmaxNoStyle">还没用过</button>
+              </div>
+            </div>
+            <div style="margin-top:18px">
+              <label style="display:block;font-size:12px;color:#71717A;letter-spacing:.1em;margin-bottom:7px">最想让它先帮你解决哪件事<span style="color:#5E5E67;letter-spacing:0"> · 选填</span></label>
+              <input name="need" type="text" placeholder="一句话就行，比如：申报材料太杂，初审太慢" style="width:100%;padding:11px 13px;background:#08090B;border:1px solid #1E2027;color:#F4F4F5;font-size:14.5px;font-family:inherit;border-radius:2px">
+            </div>
+            <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+              <label>如果你能看到这一行，请不要填写</label>
+              <input name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <div style="margin-top:18px">
               <label style="display:block;font-size:12px;color:#71717A;letter-spacing:.1em;margin-bottom:7px">手机号</label>
               <div style="display:flex;gap:9px;align-items:flex-end">
                 <input name="phone" type="tel" placeholder="11 位手机号" maxlength="11" inputmode="numeric" data-on-input="onPhone" style="flex:1;min-width:0;padding:11px 13px;background:#08090B;border:1px solid #1E2027;color:#F4F4F5;font-size:14.5px;font-family:inherit;border-radius:2px">
-                <button type="button" data-on-click="sendCode" disabled="<span data-txt="codeBusy"></span>" data-style="codeBtnStyle"><span data-txt="codeLabel"></span></button>
+                <button type="button" data-on-click="sendCode" data-bind-disabled="codeBusy" data-style="codeBtnStyle"><span data-txt="codeLabel"></span></button>
               </div>
             </div>
             <div style="margin-top:18px">
@@ -414,8 +429,8 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
           <div style="animation:fade .3s ease">
             <div style="font-size:34px;color:#D4A24C;line-height:1;margin-bottom:18px">✓</div>
             <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">收到了。</h3>
-            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">首批安排 <span data-txt="batch"></span> 位。我们会逐份看，<b style="color:#F4F4F5;font-weight:400">通过或不通过都会短信回你</b>——不让你干等着猜。</p>
-            <div style="margin-top:22px;padding:14px 16px;border-left:2px solid #8A6A2F;background:rgba(212,162,76,.08);font-size:13px;color:#A1A1AA;line-height:1.9">这批没排上的，下一批开放时你在名单前面，不用再填一次。</div>
+            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">先把话说在前面：首批只有 <span data-txt="batch"></span> 位，<b style="color:#F4F4F5;font-weight:400">优先给正在使用优破案的管理人</b>——免得你干等。</p>
+            <div style="margin-top:22px;padding:14px 16px;border-left:2px solid #8A6A2F;background:rgba(212,162,76,.08);font-size:13px;color:#A1A1AA;line-height:1.9">你的信息已经进名单了。下一批开放时短信通知你，不用再填一次。在那之前不会给你发别的东西。</div>
             <button type="button" data-on-click="closeApply" style="width:100%;margin-top:22px;padding:14px;border:1px solid #1E2027;background:none;color:#A1A1AA;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit" style-hover="border-color:#8A6A2F;color:#F4F4F5">关闭</button>
           </div>
         </div>
@@ -463,7 +478,28 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
   var CODE_ON = CODE_BASE + 'border:1px solid #8A6A2F;color:#D4A24C;cursor:pointer;';
   var CODE_OFF = CODE_BASE + 'border:1px solid #1E2027;color:#71717A;opacity:.45;cursor:not-allowed;';
 
+  var PICK = 'padding:10px 18px;background:none;font-size:13.5px;font-family:inherit;letter-spacing:.06em;cursor:pointer;transition:all .2s;';
+  var PICK_ON = PICK + 'border:1px solid #D4A24C;color:#D4A24C;background:rgba(212,162,76,.08);';
+  var PICK_OFF = PICK + 'border:1px solid #1E2027;color:#A1A1AA;';
+
+  /* 图形验证码。罗师傅 2026-08-08 定的顺序：**先过图形，再发短信**。
+   * 理由：匿名端点能直接触发真实短信 = SMS pumping 的教科书形态，一晚上能烧光
+   * 短信预算；服务端校验的验证码把脚本挡在发短信之前，号码真实性与攻击面两头都保住。
+   *
+   * 这里只留挂载点。接入时把 window.DN_CAPTCHA 换成真实实现（腾讯云/阿里云验证码，
+   * 境内可达）——必须是**服务端出题、服务端校验、一次性 ticket**；前端自绘那种
+   * 「答案存在 JS 里」的改一行就绕过去了，等于没加。
+   * 未接入时返回空 ticket，后端应据此拒发（不能默认放行）。 */
+  var captcha = window.DN_CAPTCHA || { verify: function () { return Promise.resolve(''); } };
+
   var phoneOk = function (v) { return /^1[3-9]\d{9}$/.test(v); };
+
+  /* 同一手机号最多发几次验证码（罗师傅 2026-08-08）。第 3 次直接让他换号。
+   *
+   * 🟥 前端这份计数**只是提示**——刷新页面就清零，绕不过任何有心人。
+   * 真正的闸门必须在后端：按 mobile + scene='apply' 数 dn_sms_code 的行数。
+   * 前端做它只是为了不让用户白等一次网络往返才看到"换个号码"。 */
+  var MAX_SMS_PER_PHONE = 2;
 
   var state = {
     applyOpen: false,
@@ -474,6 +510,8 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
     left: 0,          // 验证码倒计时剩余秒
     codeSent: false,
     phone: '',
+    cmax: '',         // 是否正在使用优破案：'yes' | 'no'
+    sentCount: {},    // 手机号 → 本次会话已发次数
     busy: false       // 网络请求中
   };
   var timer = null;
@@ -493,6 +531,8 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
       codeBtnStyle: busy ? CODE_OFF : CODE_ON,
       codeSent: state.codeSent,
       codeHint: DEMO_CODE ? '演示环境：验证码可填任意 6 位数字。' : '验证码已发送，5 分钟内有效。',
+      cmaxYesStyle: state.cmax === 'yes' ? PICK_ON : PICK_OFF,
+      cmaxNoStyle: state.cmax === 'no' ? PICK_ON : PICK_OFF,
       formErr: state.formErr,
       waitErr: state.waitErr,
       p1: !!state.panels.p1, p2: !!state.panels.p2, p3: !!state.panels.p3,
@@ -513,23 +553,40 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
   }
 
   function sendCode() {
-    if (state.left > 0) return;
-    if (!phoneOk(state.phone)) { state.formErr = '请先填写正确的 11 位手机号。'; return render(); }
+    if (state.busy) return;
+    var phone = state.phone;
+    if (!phoneOk(phone)) { state.formErr = '请先填写正确的 11 位手机号。'; return render(); }
+    /* 上限检查必须排在倒计时之前：已经用满 2 次的人再点，应当当场看到
+       「换个号码」，而不是一个毫无反应的按钮——那看起来像功能坏了。 */
+    if ((state.sentCount[phone] || 0) >= MAX_SMS_PER_PHONE) {
+      state.formErr = '这个号码已经发过 ' + MAX_SMS_PER_PHONE + ' 次验证码了，换一个手机号试试。';
+      return render();
+    }
+    if (state.left > 0) return;          // 倒计时中，静默（按钮本身也是 disabled）
     state.formErr = '';
-    post(ENDPOINTS.sms, { phone: state.phone }).catch(function () {
-      state.formErr = '验证码没发出去，稍后再试一次。';
+    state.busy = true; render();
+
+    /* 顺序是刻意的：**先过图形验证码，再请求发短信**。
+       验证码不通过就一条短信都不发，脚本刷不动。 */
+    captcha.verify().then(function (ticket) {
+      return post(ENDPOINTS.sms, { phone: phone, captcha_ticket: ticket });
     }).then(function () {
-      if (state.formErr) return render();
+      state.sentCount[phone] = (state.sentCount[phone] || 0) + 1;
       state.codeSent = true;
-      state.left = 60;
+      state.left = 1;
       clearInterval(timer);
       timer = setInterval(function () {
         state.left -= 1;
         if (state.left <= 0) { state.left = 0; clearInterval(timer); }
         render();
       }, 1000);
-      render();
-    });
+    }).catch(function (err) {
+      // 后端是权威：它认为这个号超额了，就照它说的提示，不看前端计数
+      var over = err && /\b429\b/.test(String(err.message || ''));
+      state.formErr = over
+        ? '这个号码已经发过 ' + MAX_SMS_PER_PHONE + ' 次验证码了，换一个手机号试试。'
+        : '验证码没发出去，稍后再试一次。';
+    }).then(function () { state.busy = false; render(); });
   }
 
   function submitApply(e) {
@@ -541,14 +598,22 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
     if (!val('name')) { state.formErr = '请填写姓名。'; return render(); }
     if (!val('org')) { state.formErr = '请填写所在机构。'; return render(); }
     if (!val('role')) { state.formErr = '请选择职位 · 角色。'; return render(); }
+    if (!state.cmax) { state.formErr = '请选择是否正在使用优破案。'; return render(); }
     if (!phoneOk(val('phone'))) { state.formErr = '请填写正确的 11 位手机号。'; return render(); }
     if (!/^\d{6}$/.test(val('code'))) { state.formErr = '请填写 6 位短信验证码。'; return render(); }
     if (!okBox || !okBox.checked) { state.formErr = '请先阅读并勾选信息使用说明。'; return render(); }
+
+    /* 蜜罐：这个输入框在视觉上被移出屏幕，真人看不见也不会填，脚本会照着
+       name 属性填。填了就静默当成功——不告诉对方被识破了，否则等于教他怎么绕。
+       后端要做同样的判断，前端这层照例只是省一次往返。 */
+    var honey = f.querySelector('[name=website]');
+    if (honey && honey.value.trim()) { state.step = 'done'; return render(); }
 
     state.formErr = '';
     state.busy = true; render();
     post(ENDPOINTS.apply, {
       name: val('name'), org: val('org'), role: val('role'),
+      uses_cmax: state.cmax === 'yes', need: val('need'),
       phone: val('phone'), code: val('code'), is_administrator: true
     }).then(function () {
       clearInterval(timer);
@@ -580,6 +645,8 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
     goForm: function () { state.step = 'form'; state.formErr = ''; render(); },
     goWait: function () { state.step = 'wait'; state.waitErr = ''; render(); },
     onPhone: function (e) { state.phone = e.target.value.trim(); },
+    pickCmaxYes: function () { state.cmax = 'yes'; state.formErr = ''; render(); },
+    pickCmaxNo: function () { state.cmax = 'no'; state.formErr = ''; render(); },
     sendCode: sendCode,
     submitApply: submitApply,
     submitWait: submitWait,
@@ -602,6 +669,22 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
     document.querySelectorAll('[data-style]').forEach(function (n) {
       var s = v[n.getAttribute('data-style')];
       if (typeof s === 'string') n.style.cssText = s;
+    });
+    /* 属性绑定（disabled 等）。布尔值按「有/无属性」处理——写
+       disabled="false" 在 HTML 里仍然是禁用，必须整个移除属性。 */
+    document.querySelectorAll('*').forEach(function (n) {
+      for (var i = n.attributes.length - 1; i >= 0; i--) {
+        var a = n.attributes[i];
+        if (a.name.indexOf('data-bind-') !== 0) continue;
+        var attr = a.name.slice('data-bind-'.length);
+        var val = v[a.value];
+        if (typeof val === 'boolean') {
+          if (val) n.setAttribute(attr, '');
+          else n.removeAttribute(attr);
+        } else if (val !== undefined && val !== null) {
+          n.setAttribute(attr, String(val));
+        }
+      }
     });
     document.querySelectorAll('[data-on-submit] button[type=submit]').forEach(function (b) {
       b.disabled = state.busy;

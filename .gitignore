@@ -1,0 +1,4 @@
+
+# 🟥 2026-08-08：字体缓存不进 git（23MB 的 Noto-Serif-SC.ttf）
+# 它是构建期下载/生成的缓存产物，不是源码。
+_src/.font-cache/

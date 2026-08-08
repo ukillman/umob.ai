@@ -1,20 +1,20 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DeepNirvana · 优破案 4.0</title>
 <meta name="description" content="DeepNirvana，优破案 4.0 · 破产管理人的 AI 助手。它说的每一句，都得摆出处。邀请制内测中，面向破产管理人。">
-<meta property="og:title" content="DeepNirvana · 优破案 4.0">
-<meta property="og:description" content="DeepNirvana，优破案 4.0 · 破产管理人的 AI 助手。它说的每一句，都得摆出处。邀请制内测中，面向破产管理人。">
-<meta property="og:type" content="website">
-<link rel="stylesheet" href="./fonts/fonts.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
 <style>
-/* 本地字体。@font-face 见 fonts/fonts.css，由 _build-fonts.py 子集化生成。
-   设计稿原本引 Google Fonts —— fonts.googleapis.com 在中国大陆不可达，
-   而这个页面是给境内破产管理人看的，外链会阻塞首屏直到超时。
-   「破局」用 Ma Shan Zheng 毛笔体，只子集了这两个字（约 1.8 KB）。 */
-
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:#08090B;color:#F4F4F5;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.75;font-size:16px}
@@ -24,9 +24,38 @@ input::placeholder{color:#4B4B54}
 input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
 @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 @keyframes sheetin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* 五项能力网格。5 个卡片塞进 2 列会在右下角留一个空洞——看起来像缺了一项。
+   改成 6 列：上排 3 个各占 2 格、下排 2 个各占 3 格，正好铺满，是刻意排的而
+   不是漏了。窄屏降到 2 列时把第 5 个拉通，单列时全部还原。 */
+.caps{display:grid;gap:1px;background:#1E2027;margin-top:48px;border:1px solid #1E2027;grid-template-columns:repeat(6,1fr)}
+/* 🟥 三处跨列一律用 :nth-child 写，优先级必须相同。
+   若基础规则写成 .caps>*{span 2} + :nth-child(n+4){span 3}，媒体查询里的
+   .caps>*{auto} 压不过 :nth-child(n+4)，第 4 张卡会带着 span 3 进 2 列网格，
+   撑出一个隐式第三列，列宽塌成 80px/80px/561px。踩过一次。 */
+.caps>*:nth-child(-n+3){grid-column:span 2}
+.caps>*:nth-child(n+4){grid-column:span 3}
+@media(max-width:980px){
+  .caps{grid-template-columns:repeat(2,1fr)}
+  .caps>*:nth-child(-n+3),.caps>*:nth-child(n+4){grid-column:auto}
+  .caps>*:nth-child(5){grid-column:1 / -1}
+}
+@media(max-width:620px){
+  .caps{grid-template-columns:1fr}
+  .caps>*:nth-child(-n+3),.caps>*:nth-child(n+4),.caps>*:nth-child(5){grid-column:auto}
+}
+}
 </style>
-</head>
-<body>
+<template id="__bundler_thumbnail" data-bg-color="#08090B">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#08090B"></rect>
+    <rect x="360" y="300" width="480" height="200" fill="none" stroke="#D4A24C" stroke-width="3"></rect>
+    <text x="600" y="425" text-anchor="middle" font-family="serif" font-size="150" fill="#D4A24C">破局</text>
+    <text x="600" y="560" text-anchor="middle" font-family="sans-serif" font-size="42" letter-spacing="6" fill="#A1A1AA">DeepNirvana</text>
+  </svg>
+</template>
+</helmet>
+
 <div style="background:#08090B;color:#F4F4F5;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;line-height:1.75">
 
   <nav style="position:sticky;top:0;z-index:50;background:rgba(8,9,11,.82);backdrop-filter:blur(14px);border-bottom:1px solid #1E2027">
@@ -37,7 +66,7 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
         <a href="#five" style="color:inherit" style-hover="color:#D4A24C">五不</a>
         <a href="#caps" style="color:inherit" style-hover="color:#D4A24C">能力</a>
         <a href="#where" style="color:inherit" style-hover="color:#D4A24C">它在哪</a>
-        <button type="button" data-on-click="openApply" style="flex:none;padding:8px 18px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:13px;letter-spacing:.1em;white-space:nowrap;cursor:pointer" style-hover="background:#D4A24C;color:#08090B">预约内测</button>
+        <button type="button" onClick="{{ openApply }}" style="flex:none;padding:8px 18px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:13px;letter-spacing:.1em;white-space:nowrap;cursor:pointer" style-hover="background:#D4A24C;color:#08090B">参与内测</button>
       </div>
     </div>
   </nav>
@@ -55,7 +84,7 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
       </div>
       <h1 style="margin:34px 0 0;font-size:clamp(40px,7.4vw,86px);font-weight:300;letter-spacing:.06em;line-height:1.1">空口无凭。</h1>
       <p style="margin:30px 0 0;font-size:clamp(17px,2vw,21px);color:#A1A1AA;font-weight:300;letter-spacing:.03em">它说的每一句，<b style="color:#F4F4F5;font-weight:400">都得摆出处</b>。</p>
-      <button type="button" data-on-click="openApply" style="display:inline-block;margin-top:44px;padding:14px 40px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:14px;letter-spacing:.16em;cursor:pointer;transition:all .25s" style-hover="background:#D4A24C;color:#08090B">优破案用户优先开通</button>
+      <button type="button" onClick="{{ openApply }}" style="display:inline-block;margin-top:44px;padding:14px 40px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:14px;letter-spacing:.16em;cursor:pointer;transition:all .25s" style-hover="background:#D4A24C;color:#08090B">帮我们把它用出来</button>
       <p style="margin:22px 0 0;font-size:12.5px;color:#71717A;letter-spacing:.05em">邀请制内测中 · 面向破产管理人</p>
     </div>
   </section>
@@ -146,8 +175,8 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
         <div style="padding:clamp(20px,5vw,30px);font-size:clamp(15px,3.6vw,16px);color:#D8D8DC;font-weight:300;line-height:2">
           先说结论的骨架：<b style="color:#F4F4F5;font-weight:400">符合条件的商品房消费者 › 建设工程价款优先受偿权 › 抵押权 › 普通债权</b>。但「符合条件」这四个字是本题的全部难点——五百多名购房人里，只付了部分房款的那些，大概率<b style="color:#F4F4F5;font-weight:400">够不着</b>那个超级优先。
           <br><br>
-          工程款与抵押权之间没有争议：承包人依<span data-on-click="toggleP1" style="color:#D4A24C;border-bottom:1px dashed #8A6A2F;cursor:pointer;padding:1px 2px;white-space:nowrap" style-hover="background:rgba(212,162,76,.08)">《民法典》第八百零七条 ⌄</span>享有的优先受偿权，依<span data-on-click="toggleP2" style="color:#D4A24C;border-bottom:1px dashed #8A6A2F;cursor:pointer;padding:1px 2px;white-space:nowrap" style-hover="background:rgba(212,162,76,.08)">法释〔2020〕25 号第三十六条 ⌄</span>优于抵押权和其他债权。
-          <div data-if="p1">
+          工程款与抵押权之间没有争议：承包人依<span onClick="{{ toggleP1 }}" style="color:#D4A24C;border-bottom:1px dashed #8A6A2F;cursor:pointer;padding:1px 2px;white-space:nowrap" style-hover="background:rgba(212,162,76,.08)">《民法典》第八百零七条 ⌄</span>享有的优先受偿权，依<span onClick="{{ toggleP2 }}" style="color:#D4A24C;border-bottom:1px dashed #8A6A2F;cursor:pointer;padding:1px 2px;white-space:nowrap" style-hover="background:rgba(212,162,76,.08)">法释〔2020〕25 号第三十六条 ⌄</span>优于抵押权和其他债权。
+          <sc-if value="{{ p1 }}" hint-placeholder-val="{{ false }}">
             <div style="margin:16px 0 4px;padding:20px 22px;background:rgba(212,162,76,.08);border-left:2px solid #D4A24C;font-size:14.5px;color:#A1A1AA;line-height:1.95;animation:fade .28s ease">
               <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:12px;flex-wrap:wrap">
                 <span style="color:#D4A24C;font-size:13px;letter-spacing:.1em">《中华人民共和国民法典》第八百零七条</span>
@@ -155,8 +184,8 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
               </div>
               发包人未按照约定支付价款的，承包人可以催告发包人在合理期限内支付价款。发包人逾期不支付的，除根据建设工程的性质不宜折价、拍卖外，承包人可以与发包人协议将该工程折价，也可以请求人民法院将该工程依法拍卖。建设工程的价款就该工程折价或者拍卖的价款优先受偿。
             </div>
-          </div>
-          <div data-if="p2">
+          </sc-if>
+          <sc-if value="{{ p2 }}" hint-placeholder-val="{{ false }}">
             <div style="margin:16px 0 4px;padding:20px 22px;background:rgba(212,162,76,.08);border-left:2px solid #D4A24C;font-size:14.5px;color:#A1A1AA;line-height:1.95;animation:fade .28s ease">
               <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:12px;flex-wrap:wrap">
                 <span style="color:#D4A24C;font-size:13px;letter-spacing:.1em">最高人民法院关于审理建设工程施工合同纠纷案件适用法律问题的解释（一）（法释〔2020〕25 号）第三十六条</span>
@@ -164,9 +193,9 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
               </div>
               承包人根据民法典第八百零七条规定享有的建设工程价款优先受偿权优于抵押权和其他债权。
             </div>
-          </div>
-          真正要拆开核的是购房人这一层。<span data-on-click="toggleP3" style="color:#D4A24C;border-bottom:1px dashed #8A6A2F;cursor:pointer;padding:1px 2px;white-space:nowrap" style-hover="background:rgba(212,162,76,.08)">法释〔2023〕1 号 ⌄</span>给的是两个<b style="color:#F4F4F5;font-weight:400">并列</b>要件：<b style="color:#F4F4F5;font-weight:400">以居住为目的</b>购买，且<b style="color:#F4F4F5;font-weight:400">已支付全部价款</b>。两个都满足，房屋交付请求权才优先于工程款优先受偿权、抵押权及其他债权。
-          <div data-if="p3">
+          </sc-if>
+          真正要拆开核的是购房人这一层。<span onClick="{{ toggleP3 }}" style="color:#D4A24C;border-bottom:1px dashed #8A6A2F;cursor:pointer;padding:1px 2px;white-space:nowrap" style-hover="background:rgba(212,162,76,.08)">法释〔2023〕1 号 ⌄</span>给的是两个<b style="color:#F4F4F5;font-weight:400">并列</b>要件：<b style="color:#F4F4F5;font-weight:400">以居住为目的</b>购买，且<b style="color:#F4F4F5;font-weight:400">已支付全部价款</b>。两个都满足，房屋交付请求权才优先于工程款优先受偿权、抵押权及其他债权。
+          <sc-if value="{{ p3 }}" hint-placeholder-val="{{ false }}">
             <div style="margin:16px 0 4px;padding:20px 22px;background:rgba(212,162,76,.08);border-left:2px solid #D4A24C;font-size:14.5px;color:#A1A1AA;line-height:1.95;animation:fade .28s ease">
               <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:12px;flex-wrap:wrap">
                 <span style="color:#D4A24C;font-size:13px;letter-spacing:.1em">最高人民法院关于商品房消费者权利保护问题的批复（法释〔2023〕1 号）</span>
@@ -174,9 +203,9 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
               </div>
               商品房消费者以居住为目的购买房屋并已支付全部价款，主张其房屋交付请求权优先于建设工程价款优先受偿权、抵押权以及其他债权的，人民法院应予支持。
             </div>
-          </div>
-          <b style="color:#F4F4F5;font-weight:400">这里有一条容易踩的旧规则</b>：<span data-on-click="toggleP4" style="color:#71717A;border-bottom:1px dashed #3F3F46;text-decoration:line-through;text-decoration-color:#52525B;cursor:pointer;padding:1px 2px;white-space:nowrap" style-hover="background:rgba(113,113,122,.10)">法释〔2002〕16 号批复 ⌄</span>曾规定购房人支付「全部或者<b style="color:#F4F4F5;font-weight:400">大部分</b>款项」即可对抗承包人优先权。该批复<b style="color:#F4F4F5;font-weight:400">已于 2021 年 1 月 1 日废止</b>，「大部分款项」这一标准不再适用——付了七成房款的购房人，按旧批复能对抗，按现行规则不能。结论完全相反，且是会赔钱的那一类。
-          <div data-if="p4">
+          </sc-if>
+          <b style="color:#F4F4F5;font-weight:400">这里有一条容易踩的旧规则</b>：<span onClick="{{ toggleP4 }}" style="color:#71717A;border-bottom:1px dashed #3F3F46;text-decoration:line-through;text-decoration-color:#52525B;cursor:pointer;padding:1px 2px;white-space:nowrap" style-hover="background:rgba(113,113,122,.10)">法释〔2002〕16 号批复 ⌄</span>曾规定购房人支付「全部或者<b style="color:#F4F4F5;font-weight:400">大部分</b>款项」即可对抗承包人优先权。该批复<b style="color:#F4F4F5;font-weight:400">已于 2021 年 1 月 1 日废止</b>，「大部分款项」这一标准不再适用——付了七成房款的购房人，按旧批复能对抗，按现行规则不能。结论完全相反，且是会赔钱的那一类。
+          <sc-if value="{{ p4 }}" hint-placeholder-val="{{ false }}">
             <div style="margin:16px 0 4px;padding:20px 22px;background:rgba(113,113,122,.07);border-left:2px solid #52525B;font-size:14.5px;color:#A1A1AA;line-height:1.95;animation:fade .28s ease">
               <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:12px;flex-wrap:wrap">
                 <span style="color:#A1A1AA;font-size:13px;letter-spacing:.1em;text-decoration:line-through;text-decoration-color:#52525B">最高人民法院关于建设工程价款优先受偿权问题的批复（法释〔2002〕16 号）</span>
@@ -185,18 +214,18 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
               随《最高人民法院关于审理建设工程施工合同纠纷案件适用法律问题的解释（一）》（法释〔2020〕25 号）施行同时废止，废止日 2021-01-01。其第一条内容已被法释〔2020〕25 号第三十六条吸收；第二条「大部分款项」标准已由法释〔2023〕1 号的「已支付全部价款」取代。<br>
               <span style="color:#8A8A93">效力状态由法规库标记，该条在检索阶段即被排除，不进入生成。</span>
             </div>
-          </div>
+          </sc-if>
           所以，<b style="color:#F4F4F5;font-weight:400">五百多名购房人，不等于五百多个超级优先</b>——要逐户核两件事：是否以居住为目的（而非投资），是否已付全部价款。不满足的，回落到普通债权或按合同另行主张。另两方同样要过要件关，顺位靠前不等于申报数字照单全收：工程款要核实际施工、结算金额、是否仍在行使期内、有无放弃优先权的约定；抵押权要核登记时间与抵押范围、已售房屋是否仍在覆盖之内。这些归类与核减的结果，直接决定清偿方案里各组的分子分母——<b style="color:#F4F4F5;font-weight:400">顺位是一行字，成立不成立是三摞材料</b>。
           <br><br>
-          <span data-on-click="toggleP5" style="color:#D4A24C;border-bottom:1px dashed #8A6A2F;cursor:pointer;padding:1px 2px" style-hover="background:rgba(212,162,76,.08)">另有 3 条相关规定本次未直接引用 ⌄</span>
-          <div data-if="p5">
+          <span onClick="{{ toggleP5 }}" style="color:#D4A24C;border-bottom:1px dashed #8A6A2F;cursor:pointer;padding:1px 2px" style-hover="background:rgba(212,162,76,.08)">另有 3 条相关规定本次未直接引用 ⌄</span>
+          <sc-if value="{{ p5 }}" hint-placeholder-val="{{ false }}">
             <div style="margin:16px 0 4px;padding:20px 22px;background:rgba(212,162,76,.045);border-left:2px solid #8A6A2F;font-size:14.5px;color:#A1A1AA;line-height:1.95;animation:fade .28s ease">
               <div style="margin-bottom:12px"><span style="color:#B99A63;font-size:13px;letter-spacing:.1em">检索到、与本题相关，但未作为本次结论的直接依据</span></div>
               <div style="padding:9px 0;border-bottom:1px dashed #26282F"><b style="color:#C9C9CE;font-weight:400">《企业破产法》第一百零九条</b> — 对破产人特定财产享有担保权的权利人，就该特定财产优先受偿。本题只排顺位、未展开抵押权在破产程序中的受偿基础，故未引。</div>
               <div style="padding:9px 0;border-bottom:1px dashed #26282F"><b style="color:#C9C9CE;font-weight:400">法释〔2020〕25 号第四十一条</b> — 优先受偿权的行使期限最长十八个月，自发包人应当给付工程价款之日起算。破产语境下常成争点，但你的问题问的是顺位不是期限。</div>
               <div style="padding:9px 0"><b style="color:#C9C9CE;font-weight:400">《企业破产法》第四十六条</b> — 附利息债权自受理时停止计息。影响各组债权的金额基数，不影响顺位本身。</div>
             </div>
-          </div>
+          </sc-if>
         </div>
 
         <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px clamp(18px,5vw,30px);border-top:1px solid #1E2027;font-size:12.5px;color:#71717A;letter-spacing:.03em">
@@ -275,7 +304,7 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
     <div style="max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,28px)">
       <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:22px">首批五项能力 · 邀请制内测中</div>
       <h2 style="margin:0;font-size:clamp(26px,3.4vw,38px);font-weight:300;letter-spacing:.04em;line-height:1.45">它不是一个聊天框，<br>是五件你每天都要做的事。</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:#1E2027;margin-top:48px;border:1px solid #1E2027">
+      <div class="caps">
         <div style="background:#08090B;padding:30px 26px">
           <i style="font-style:normal;display:block;font-size:11px;color:#D4A24C;letter-spacing:.2em;margin-bottom:14px">01</i>
           <h3 style="margin:0 0 12px;font-size:17px;font-weight:400;letter-spacing:.08em">破产实务问答</h3>
@@ -316,8 +345,8 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
     <div style="max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,28px)">
       <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:22px">优先接入</div>
       <h2 style="margin:0 0 14px;font-size:clamp(26px,3.4vw,38px);font-weight:300;letter-spacing:.04em;line-height:1.45">首批五项能力，邀请制内测中。</h2>
-      <p style="color:#A1A1AA;font-size:17px;font-weight:300;max-width:660px;margin:20px auto 0;text-wrap:pretty">首批 <span data-txt="batch"></span> 位，面向正在办案的破产管理人。在下面填一份申请，我们逐份看，短信回你。</p>
-      <button type="button" data-on-click="openApply" style="display:inline-block;margin-top:44px;padding:14px 40px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:14px;letter-spacing:.16em;cursor:pointer;transition:all .25s" style-hover="background:#D4A24C;color:#08090B">优破案用户优先开通</button>
+      <p style="color:#A1A1AA;font-size:17px;font-weight:300;max-width:660px;margin:20px auto 0;text-wrap:pretty">首批 {{ batch }} 位。想请正在办案的管理人，在真实案子里用一用，告诉我们哪里不对、哪里该改——名额优先给正在使用优破案的机构。</p>
+      <button type="button" onClick="{{ openApply }}" style="display:inline-block;margin-top:44px;padding:14px 40px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:14px;letter-spacing:.16em;cursor:pointer;transition:all .25s" style-hover="background:#D4A24C;color:#08090B">优破案用户优先开通</button>
     </div>
   </section>
 
@@ -328,42 +357,42 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
     </div>
   </footer>
 
-  <div data-if="applyOpen">
-    <div data-on-click="closeApply" style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(4,5,7,.86);backdrop-filter:blur(6px)">
-      <div data-on-click="stop" style="width:100%;max-width:470px;max-height:92vh;overflow-y:auto;background:#0D0E11;border:1px solid #1E2027;padding:clamp(28px,7vw,38px) clamp(20px,6vw,34px) 32px;position:relative;text-align:left;animation:sheetin .3s ease">
-        <button type="button" data-on-click="closeApply" aria-label="关闭" style="position:absolute;top:14px;right:16px;background:none;border:none;color:#71717A;font-size:22px;line-height:1;cursor:pointer;padding:6px" style-hover="color:#F4F4F5">×</button>
+  <sc-if value="{{ applyOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeApply }}" style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(4,5,7,.86);backdrop-filter:blur(6px)">
+      <div onClick="{{ stop }}" style="width:100%;max-width:470px;max-height:92vh;overflow-y:auto;background:#0D0E11;border:1px solid #1E2027;padding:clamp(28px,7vw,38px) clamp(20px,6vw,34px) 32px;position:relative;text-align:left;animation:sheetin .3s ease">
+        <button type="button" onClick="{{ closeApply }}" aria-label="关闭" style="position:absolute;top:14px;right:16px;background:none;border:none;color:#71717A;font-size:22px;line-height:1;cursor:pointer;padding:6px" style-hover="color:#F4F4F5">×</button>
 
-        <div data-if="stepGate">
+        <sc-if value="{{ stepGate }}" hint-placeholder-val="{{ true }}">
           <div style="animation:fade .3s ease">
-            <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:14px">申请内测资格</div>
-            <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">首批 <span data-txt="batch"></span> 位。</h3>
-            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">内测面向正在办案的破产管理人。名额很少，我们想把它放在能给出真实反馈的地方。</p>
+            <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:14px">参与内测</div>
+            <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">首批 {{ batch }} 位。</h3>
+            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">想请正在办案的管理人，帮我们把它用出来。名额优先给正在使用优破案的机构——留个联系方式，开放时告诉你。</p>
             <div style="font-size:16px;color:#F4F4F5;margin:26px 0 16px;letter-spacing:.03em">你目前是否担任破产管理人？</div>
             <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <button type="button" data-on-click="goForm" style="padding:12px 24px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .2s" style-hover="background:#D4A24C;color:#08090B">是，我正在办案</button>
-              <button type="button" data-on-click="goWait" style="padding:12px 24px;border:1px solid #1E2027;background:none;color:#A1A1AA;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .2s" style-hover="border-color:#8A6A2F;color:#F4F4F5">不是</button>
+              <button type="button" onClick="{{ goForm }}" style="padding:12px 24px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .2s" style-hover="background:#D4A24C;color:#08090B">是，我正在办案</button>
+              <button type="button" onClick="{{ goWait }}" style="padding:12px 24px;border:1px solid #1E2027;background:none;color:#A1A1AA;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .2s" style-hover="border-color:#8A6A2F;color:#F4F4F5">不是</button>
             </div>
           </div>
-        </div>
+        </sc-if>
 
-        <div data-if="stepWait">
-          <form data-on-submit="submitWait" style="animation:fade .3s ease">
+        <sc-if value="{{ stepWait }}" hint-placeholder-val="{{ false }}">
+          <form onSubmit="{{ submitWait }}" style="animation:fade .3s ease">
             <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:14px">这一批可能排不上</div>
             <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">先记下你。</h3>
             <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">首批只开放给正在办案的管理人——不是设门槛，是名额实在太少，我们想先听办案的人怎么说。</p>
-            <p style="margin:8px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">后续批次开放时通知你。留个手机号就行，别的都不用填。</p>
+            <p style="margin:8px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">后续批次开放时告诉你。留个手机号就行，别的都不用填。</p>
             <div style="margin-top:18px">
               <label style="display:block;font-size:12px;color:#71717A;letter-spacing:.1em;margin-bottom:7px">手机号</label>
               <input name="phone" type="tel" placeholder="11 位手机号" maxlength="11" inputmode="numeric" style="width:100%;padding:11px 13px;background:#08090B;border:1px solid #1E2027;color:#F4F4F5;font-size:14.5px;font-family:inherit;border-radius:2px">
             </div>
-            <div style="font-size:12.5px;color:#C2707A;margin-top:12px;min-height:17px"><span data-txt="waitErr"></span></div>
+            <div style="font-size:12.5px;color:#C2707A;margin-top:12px;min-height:17px">{{ waitErr }}</div>
             <button type="submit" style="width:100%;margin-top:22px;padding:14px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .2s" style-hover="background:#D4A24C;color:#08090B">加入通知名单</button>
-            <button type="button" data-on-click="closeApply" style="width:100%;border:none;background:none;color:#71717A;padding:12px 0;font-size:13px;font-family:inherit;cursor:pointer" style-hover="color:#D4A24C">先不用了</button>
+            <button type="button" onClick="{{ closeApply }}" style="width:100%;border:none;background:none;color:#71717A;padding:12px 0;font-size:13px;font-family:inherit;cursor:pointer" style-hover="color:#D4A24C">先不用了</button>
           </form>
-        </div>
+        </sc-if>
 
-        <div data-if="stepForm">
-          <form data-on-submit="submitApply" style="animation:fade .3s ease">
+        <sc-if value="{{ stepForm }}" hint-placeholder-val="{{ false }}">
+          <form onSubmit="{{ submitApply }}" style="animation:fade .3s ease">
             <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:14px">申请内测资格</div>
             <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">留个联系方式。</h3>
             <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">四项，一分钟填完。手机号需要验证——因为审核结果会短信回你。</p>
@@ -388,243 +417,163 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
               </select>
             </div>
             <div style="margin-top:18px">
+              <label style="display:block;font-size:12px;color:#71717A;letter-spacing:.1em;margin-bottom:7px">是否正在使用优破案</label>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button type="button" onClick="{{ pickCmaxYes }}" style="{{ cmaxYesStyle }}">是，我们所在用</button>
+                <button type="button" onClick="{{ pickCmaxNo }}" style="{{ cmaxNoStyle }}">还没用过</button>
+              </div>
+            </div>
+            <div style="margin-top:18px">
+              <label style="display:block;font-size:12px;color:#71717A;letter-spacing:.1em;margin-bottom:7px">最想让它先帮你解决哪件事<span style="color:#5E5E67;letter-spacing:0"> · 选填</span></label>
+              <input name="need" type="text" placeholder="一句话就行，比如：申报材料太杂，初审太慢" style="width:100%;padding:11px 13px;background:#08090B;border:1px solid #1E2027;color:#F4F4F5;font-size:14.5px;font-family:inherit;border-radius:2px">
+            </div>
+            <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+              <label>如果你能看到这一行，请不要填写</label>
+              <input name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <div style="margin-top:18px">
               <label style="display:block;font-size:12px;color:#71717A;letter-spacing:.1em;margin-bottom:7px">手机号</label>
               <div style="display:flex;gap:9px;align-items:flex-end">
-                <input name="phone" type="tel" placeholder="11 位手机号" maxlength="11" inputmode="numeric" data-on-input="onPhone" style="flex:1;min-width:0;padding:11px 13px;background:#08090B;border:1px solid #1E2027;color:#F4F4F5;font-size:14.5px;font-family:inherit;border-radius:2px">
-                <button type="button" data-on-click="sendCode" disabled="<span data-txt="codeBusy"></span>" data-style="codeBtnStyle"><span data-txt="codeLabel"></span></button>
+                <input name="phone" type="tel" placeholder="11 位手机号" maxlength="11" inputmode="numeric" onInput="{{ onPhone }}" style="flex:1;min-width:0;padding:11px 13px;background:#08090B;border:1px solid #1E2027;color:#F4F4F5;font-size:14.5px;font-family:inherit;border-radius:2px">
+                <button type="button" onClick="{{ sendCode }}" disabled="{{ codeBusy }}" style="{{ codeBtnStyle }}">{{ codeLabel }}</button>
               </div>
             </div>
             <div style="margin-top:18px">
               <label style="display:block;font-size:12px;color:#71717A;letter-spacing:.1em;margin-bottom:7px">短信验证码</label>
               <input name="code" type="text" placeholder="6 位数字" maxlength="6" inputmode="numeric" style="width:100%;padding:11px 13px;background:#08090B;border:1px solid #1E2027;color:#F4F4F5;font-size:14.5px;font-family:inherit;border-radius:2px">
             </div>
-            <div data-if="codeSent">
-              <div style="margin-top:10px;font-size:12px;color:#6EBE8A;letter-spacing:.04em"><span data-txt="codeHint"></span></div>
-            </div>
+            <sc-if value="{{ codeSent }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:10px;font-size:12px;color:#6EBE8A;letter-spacing:.04em">{{ codeHint }}</div>
+            </sc-if>
             <label style="display:flex;gap:10px;align-items:flex-start;margin-top:24px;cursor:pointer">
               <input name="ok" type="checkbox" style="margin-top:3px;accent-color:#D4A24C;flex-shrink:0;width:14px;height:14px">
               <span style="font-size:12px;color:#71717A;line-height:1.85">我已阅读并同意：以上信息仅用于内测资格审核与结果通知，存储于中国境内服务器，不用于其他用途，也不会提供给第三方。</span>
             </label>
-            <div style="font-size:12.5px;color:#C2707A;margin-top:12px;min-height:17px"><span data-txt="formErr"></span></div>
+            <div style="font-size:12.5px;color:#C2707A;margin-top:12px;min-height:17px">{{ formErr }}</div>
             <button type="submit" style="width:100%;margin-top:8px;padding:14px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .2s" style-hover="background:#D4A24C;color:#08090B">提交申请</button>
           </form>
-        </div>
+        </sc-if>
 
-        <div data-if="stepDone">
+        <sc-if value="{{ stepDone }}" hint-placeholder-val="{{ false }}">
           <div style="animation:fade .3s ease">
             <div style="font-size:34px;color:#D4A24C;line-height:1;margin-bottom:18px">✓</div>
             <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">收到了。</h3>
-            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">首批安排 <span data-txt="batch"></span> 位。我们会逐份看，<b style="color:#F4F4F5;font-weight:400">通过或不通过都会短信回你</b>——不让你干等着猜。</p>
-            <div style="margin-top:22px;padding:14px 16px;border-left:2px solid #8A6A2F;background:rgba(212,162,76,.08);font-size:13px;color:#A1A1AA;line-height:1.9">这批没排上的，下一批开放时你在名单前面，不用再填一次。</div>
-            <button type="button" data-on-click="closeApply" style="width:100%;margin-top:22px;padding:14px;border:1px solid #1E2027;background:none;color:#A1A1AA;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit" style-hover="border-color:#8A6A2F;color:#F4F4F5">关闭</button>
+            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">先把话说在前面：首批只有 {{ batch }} 位，<b style="color:#F4F4F5;font-weight:400">优先给正在使用优破案的管理人</b>——免得你干等。</p>
+            <div style="margin-top:22px;padding:14px 16px;border-left:2px solid #8A6A2F;background:rgba(212,162,76,.08);font-size:13px;color:#A1A1AA;line-height:1.9">你留的联系方式我们收着了。下一批开放时短信告诉你，不用再填一次。在那之前不会给你发别的东西。</div>
+            <button type="button" onClick="{{ closeApply }}" style="width:100%;margin-top:22px;padding:14px;border:1px solid #1E2027;background:none;color:#A1A1AA;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit" style-hover="border-color:#8A6A2F;color:#F4F4F5">关闭</button>
           </div>
-        </div>
+        </sc-if>
 
-        <div data-if="stepDoneWait">
+        <sc-if value="{{ stepDoneWait }}" hint-placeholder-val="{{ false }}">
           <div style="animation:fade .3s ease">
             <div style="font-size:34px;color:#D4A24C;line-height:1;margin-bottom:18px">✓</div>
             <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">记下了。</h3>
             <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">下一批开放时短信通知你。在那之前不会给你发别的东西。</p>
-            <button type="button" data-on-click="closeApply" style="width:100%;margin-top:22px;padding:14px;border:1px solid #1E2027;background:none;color:#A1A1AA;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit" style-hover="border-color:#8A6A2F;color:#F4F4F5">关闭</button>
+            <button type="button" onClick="{{ closeApply }}" style="width:100%;margin-top:22px;padding:14px;border:1px solid #1E2027;background:none;color:#A1A1AA;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit" style-hover="border-color:#8A6A2F;color:#F4F4F5">关闭</button>
           </div>
-        </div>
+        </sc-if>
       </div>
     </div>
-  </div>
+  </sc-if>
 </div>
-<script>
-/* DeepNirvana 内测首页运行时。
- *
- * 设计稿自带的 DCLogic 是设计工具的运行时，不进生产。这里用原生 JS 复刻它的
- * 全部行为，计算逻辑与设计稿 `renderVals()` 逐条对齐，文案一字未改：
- *   · 引证面板 p1–p5 展开/收起（金色为采用，灰色删除线为已废止被排除）
- *   · 申请弹层四步：gate → form / wait → done / done-wait
- *   · 短信验证码 60 秒倒计时
- *
- * 与设计稿的差异只有一处，是刻意的：提交改为真调后端。设计稿只在前端置成功
- * 态（它是规格件，本来就不该带网络请求）。后端未就位时走本地模拟，形态照常
- * 能看；接口就位后把 ENDPOINTS 填上即可，其余代码不动。
- */
-(function () {
-  'use strict';
 
-  /* 后端接口。null = 前端模拟（不发请求，直接置成功态）。
-     后端就位后填真实路径即可，页面其余部分不用改。
-     计划：POST /api/v1/beta-apply、/api/v1/beta-apply/sms、/api/v1/beta-apply/waitlist */
-  var ENDPOINTS = window.DN_APPLY_ENDPOINTS || { apply: null, sms: null, waitlist: null };
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;firstBatch&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5–10&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;内测名额&quot;},&quot;demoCode&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;表单&quot;}}">
+const phoneOk = (v) => /^1[3-9]\d{9}$/.test(v);
+const CODE_BASE = 'padding:11px 15px;white-space:nowrap;background:none;font-size:13px;font-family:inherit;border-radius:2px;transition:all .2s;';
+const CODE_ON = CODE_BASE + 'border:1px solid #8A6A2F;color:#D4A24C;cursor:pointer;';
+const CODE_OFF = CODE_BASE + 'border:1px solid #1E2027;color:#71717A;opacity:.45;cursor:not-allowed;';
 
-  /* 首批名额。改这里就改页面上所有出现「5–10 位」的地方（共 3 处）。 */
-  var BATCH = '5–10';
-
-  /* 演示环境提示语。接上真短信网关后置 false。 */
-  var DEMO_CODE = true;
-
-  var CODE_BASE = 'padding:11px 15px;white-space:nowrap;background:none;font-size:13px;font-family:inherit;border-radius:2px;transition:all .2s;';
-  var CODE_ON = CODE_BASE + 'border:1px solid #8A6A2F;color:#D4A24C;cursor:pointer;';
-  var CODE_OFF = CODE_BASE + 'border:1px solid #1E2027;color:#71717A;opacity:.45;cursor:not-allowed;';
-
-  var phoneOk = function (v) { return /^1[3-9]\d{9}$/.test(v); };
-
-  var state = {
-    applyOpen: false,
-    step: 'gate',
-    panels: {},
-    formErr: '',
-    waitErr: '',
-    left: 0,          // 验证码倒计时剩余秒
-    codeSent: false,
-    phone: '',
-    busy: false       // 网络请求中
+class Component extends DCLogic {
+  state = {
+    applyOpen: false, step: 'gate',
+    panels: {}, formErr: '', waitErr: '',
+    left: 0, codeSent: false, phone: ''
   };
-  var timer = null;
 
-  function vals() {
-    var busy = state.left > 0;
+  onKey = (e) => { if (e.key === 'Escape') this.setState({ applyOpen: false }); };
+  componentDidMount() { window.addEventListener('keydown', this.onKey); }
+  componentWillUnmount() { window.removeEventListener('keydown', this.onKey); clearInterval(this.timer); }
+
+  toggle(id) {
+    this.setState((s) => ({ panels: Object.assign({}, s.panels, { [id]: !s.panels[id] }) }));
+  }
+
+  sendCode = () => {
+    if (this.state.left > 0) return;
+    if (!phoneOk(this.state.phone)) return this.setState({ formErr: '请先填写正确的 11 位手机号。' });
+    // 真实发送由后端限流（同一手机号 / 同一 IP），前端这层只防误触
+    this.setState({ formErr: '', codeSent: true, left: 60 });
+    clearInterval(this.timer);
+    this.timer = setInterval(() => {
+      this.setState((s) => {
+        const left = s.left - 1;
+        if (left <= 0) clearInterval(this.timer);
+        return { left: Math.max(0, left) };
+      });
+    }, 1000);
+  };
+
+  submitApply = (e) => {
+    e.preventDefault();
+    const f = e.target;
+    const v = (n) => (f[n].value || '').trim();
+    if (!v('name')) return this.setState({ formErr: '请填写姓名。' });
+    if (!v('org')) return this.setState({ formErr: '请填写所在机构。' });
+    if (!v('role')) return this.setState({ formErr: '请选择职位 · 角色。' });
+    if (!phoneOk(v('phone'))) return this.setState({ formErr: '请填写正确的 11 位手机号。' });
+    if (!/^\d{6}$/.test(v('code'))) return this.setState({ formErr: '请填写 6 位短信验证码。' });
+    if (!f.ok.checked) return this.setState({ formErr: '请先阅读并勾选信息使用说明。' });
+    // TODO(后端): POST /api/apply { name, org, role, phone, code, is_administrator:true }
+    clearInterval(this.timer);
+    this.setState({ formErr: '', step: 'done', left: 0, codeSent: false });
+  };
+
+  submitWait = (e) => {
+    e.preventDefault();
+    const p = (e.target.phone.value || '').trim();
+    if (!phoneOk(p)) return this.setState({ waitErr: '请填写正确的 11 位手机号。' });
+    // TODO(后端): POST /api/apply/waitlist { phone }
+    this.setState({ waitErr: '', step: 'done-wait' });
+  };
+
+  renderVals() {
+    const s = this.state;
+    const p = this.props;
+    const busy = s.left > 0;
     return {
-      batch: BATCH,
-      applyOpen: state.applyOpen,
-      stepGate: state.step === 'gate',
-      stepWait: state.step === 'wait',
-      stepForm: state.step === 'form',
-      stepDone: state.step === 'done',
-      stepDoneWait: state.step === 'done-wait',
+      batch: (p.firstBatch ?? '5–10').trim() || '5–10',
+      applyOpen: s.applyOpen,
+      openApply: () => this.setState({ applyOpen: true, step: 'gate', formErr: '', waitErr: '' }),
+      closeApply: () => this.setState({ applyOpen: false }),
+      stop: (e) => e.stopPropagation(),
+      stepGate: s.step === 'gate',
+      stepWait: s.step === 'wait',
+      stepForm: s.step === 'form',
+      stepDone: s.step === 'done',
+      stepDoneWait: s.step === 'done-wait',
+      goForm: () => this.setState({ step: 'form', formErr: '' }),
+      goWait: () => this.setState({ step: 'wait', waitErr: '' }),
+      onPhone: (e) => { this.state.phone = e.target.value.trim(); },
+      sendCode: this.sendCode,
       codeBusy: busy,
-      codeLabel: busy ? state.left + ' 秒后重发' : (state.codeSent ? '重新获取' : '获取验证码'),
+      codeLabel: busy ? s.left + ' 秒后重发' : (s.codeSent ? '重新获取' : '获取验证码'),
       codeBtnStyle: busy ? CODE_OFF : CODE_ON,
-      codeSent: state.codeSent,
-      codeHint: DEMO_CODE ? '演示环境：验证码可填任意 6 位数字。' : '验证码已发送，5 分钟内有效。',
-      formErr: state.formErr,
-      waitErr: state.waitErr,
-      p1: !!state.panels.p1, p2: !!state.panels.p2, p3: !!state.panels.p3,
-      p4: !!state.panels.p4, p5: !!state.panels.p5
+      codeSent: s.codeSent,
+      codeHint: (p.demoCode ?? true) ? '演示环境：验证码可填任意 6 位数字。' : '验证码已发送，5 分钟内有效。',
+      submitApply: this.submitApply,
+      submitWait: this.submitWait,
+      formErr: s.formErr,
+      waitErr: s.waitErr,
+      p1: !!s.panels.p1, p2: !!s.panels.p2, p3: !!s.panels.p3, p4: !!s.panels.p4, p5: !!s.panels.p5,
+      toggleP1: () => this.toggle('p1'),
+      toggleP2: () => this.toggle('p2'),
+      toggleP3: () => this.toggle('p3'),
+      toggleP4: () => this.toggle('p4'),
+      toggleP5: () => this.toggle('p5')
     };
   }
-
-  function toggle(id) { state.panels[id] = !state.panels[id]; render(); }
-
-  /* 后端未就位时 fetch 一律短路成 resolve，形态照常能走完。 */
-  function post(url, payload) {
-    if (!url) return Promise.resolve();
-    return fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(function (r) { if (!r.ok) throw new Error('http ' + r.status); });
-  }
-
-  function sendCode() {
-    if (state.left > 0) return;
-    if (!phoneOk(state.phone)) { state.formErr = '请先填写正确的 11 位手机号。'; return render(); }
-    state.formErr = '';
-    post(ENDPOINTS.sms, { phone: state.phone }).catch(function () {
-      state.formErr = '验证码没发出去，稍后再试一次。';
-    }).then(function () {
-      if (state.formErr) return render();
-      state.codeSent = true;
-      state.left = 60;
-      clearInterval(timer);
-      timer = setInterval(function () {
-        state.left -= 1;
-        if (state.left <= 0) { state.left = 0; clearInterval(timer); }
-        render();
-      }, 1000);
-      render();
-    });
-  }
-
-  function submitApply(e) {
-    e.preventDefault();
-    if (state.busy) return;
-    var f = e.target;
-    var val = function (n) { var el = f.querySelector('[name=' + n + ']'); return el ? (el.value || '').trim() : ''; };
-    var okBox = f.querySelector('[name=ok]');
-    if (!val('name')) { state.formErr = '请填写姓名。'; return render(); }
-    if (!val('org')) { state.formErr = '请填写所在机构。'; return render(); }
-    if (!val('role')) { state.formErr = '请选择职位 · 角色。'; return render(); }
-    if (!phoneOk(val('phone'))) { state.formErr = '请填写正确的 11 位手机号。'; return render(); }
-    if (!/^\d{6}$/.test(val('code'))) { state.formErr = '请填写 6 位短信验证码。'; return render(); }
-    if (!okBox || !okBox.checked) { state.formErr = '请先阅读并勾选信息使用说明。'; return render(); }
-
-    state.formErr = '';
-    state.busy = true; render();
-    post(ENDPOINTS.apply, {
-      name: val('name'), org: val('org'), role: val('role'),
-      phone: val('phone'), code: val('code'), is_administrator: true
-    }).then(function () {
-      clearInterval(timer);
-      state.step = 'done'; state.left = 0; state.codeSent = false;
-    }).catch(function () {
-      state.formErr = '提交没成功，可能是网络问题。稍后再试一次。';
-    }).then(function () { state.busy = false; render(); });
-  }
-
-  function submitWait(e) {
-    e.preventDefault();
-    if (state.busy) return;
-    var el = e.target.querySelector('[name=phone]');
-    var p = el ? (el.value || '').trim() : '';
-    if (!phoneOk(p)) { state.waitErr = '请填写正确的 11 位手机号。'; return render(); }
-    state.waitErr = '';
-    state.busy = true; render();
-    post(ENDPOINTS.waitlist, { phone: p }).then(function () {
-      state.step = 'done-wait';
-    }).catch(function () {
-      state.waitErr = '提交没成功，稍后再试一次。';
-    }).then(function () { state.busy = false; render(); });
-  }
-
-  var handlers = {
-    openApply: function () { state.applyOpen = true; state.step = 'gate'; state.formErr = ''; state.waitErr = ''; render(); },
-    closeApply: function () { state.applyOpen = false; render(); },
-    stop: function (e) { e.stopPropagation(); },
-    goForm: function () { state.step = 'form'; state.formErr = ''; render(); },
-    goWait: function () { state.step = 'wait'; state.waitErr = ''; render(); },
-    onPhone: function (e) { state.phone = e.target.value.trim(); },
-    sendCode: sendCode,
-    submitApply: submitApply,
-    submitWait: submitWait,
-    toggleP1: function () { toggle('p1'); },
-    toggleP2: function () { toggle('p2'); },
-    toggleP3: function () { toggle('p3'); },
-    toggleP4: function () { toggle('p4'); },
-    toggleP5: function () { toggle('p5'); }
-  };
-
-  function render() {
-    var v = vals();
-    document.querySelectorAll('[data-txt]').forEach(function (n) {
-      var t = v[n.getAttribute('data-txt')];
-      n.textContent = (t === undefined || t === null) ? '' : String(t);
-    });
-    document.querySelectorAll('[data-if]').forEach(function (n) {
-      n.style.display = v[n.getAttribute('data-if')] ? '' : 'none';
-    });
-    document.querySelectorAll('[data-style]').forEach(function (n) {
-      var s = v[n.getAttribute('data-style')];
-      if (typeof s === 'string') n.style.cssText = s;
-    });
-    document.querySelectorAll('[data-on-submit] button[type=submit]').forEach(function (b) {
-      b.disabled = state.busy;
-      b.style.opacity = state.busy ? '.55' : '';
-    });
-  }
-
-  function bind() {
-    ['click', 'submit', 'input'].forEach(function (evt) {
-      document.querySelectorAll('[data-on-' + evt + ']').forEach(function (n) {
-        var h = handlers[n.getAttribute('data-on-' + evt)];
-        if (h) n.addEventListener(evt, h);
-      });
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && state.applyOpen) { state.applyOpen = false; render(); }
-    });
-    render();
-  }
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
-  else bind();
-})();
+}
 
 </script>
 </body>

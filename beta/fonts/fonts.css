@@ -1,0 +1,3 @@
+/* 本地字体。由 _src/build-fonts.py 生成，请勿手改。
+   改页面文案后重跑该脚本，否则新出现的汉字会掉回系统字体。 */
+@font-face{font-family:'Ma Shan Zheng';font-style:normal;font-weight:400;font-display:swap;src:url('./ma-shan-zheng-400.woff2') format('woff2')}
