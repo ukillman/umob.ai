@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DeepNirvana · 优破案 4.0</title>
+<style>
+  :root{
+    --bg:#08090B; --bg2:#0D0E11; --line:#1E2027;
+    --fg:#F4F4F5; --fg2:#A1A1AA; --fg3:#71717A;
+    --gold:#D4A24C; --gold-dim:#8A6A2F; --gold-bg:rgba(212,162,76,.08);
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.75; font-size:16px;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  section{padding:104px 0;border-top:1px solid var(--line)}
+  .eyebrow{
+    font-size:12px;letter-spacing:.22em;color:var(--gold);
+    text-transform:uppercase;font-weight:500;margin-bottom:22px
+  }
+  h2{font-size:clamp(26px,3.4vw,38px);font-weight:300;letter-spacing:.04em;line-height:1.45}
+  .lede{color:var(--fg2);font-size:17px;font-weight:300;max-width:660px;margin-top:20px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(8,9,11,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{font-size:14px;letter-spacing:.12em;color:var(--fg)}
+  .brand b{font-weight:600}
+  .brand span{color:var(--fg3);margin-left:10px;font-size:12px;letter-spacing:.16em}
+  .navlinks{display:flex;gap:30px;font-size:13px;color:var(--fg2);letter-spacing:.08em}
+  .navlinks a{color:inherit;text-decoration:none;transition:color .2s}
+  .navlinks a:hover{color:var(--gold)}
+  @media(max-width:720px){.navlinks{display:none}}
+
+  /* hero */
+  .hero{padding:130px 0 108px;border-top:none;position:relative;overflow:hidden}
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(720px 340px at 50% -12%,rgba(212,162,76,.10),transparent 68%);
+  }
+  .hero .wrap{position:relative;z-index:1;text-align:center}
+  h1{
+    font-size:clamp(58px,11vw,124px);font-weight:300;letter-spacing:.06em;
+    line-height:1.06;margin:26px 0 0
+  }
+  .hero .sub{font-size:clamp(17px,2vw,21px);color:var(--fg2);font-weight:300;margin-top:30px;letter-spacing:.03em}
+  .hero .sub b{color:var(--fg);font-weight:400}
+  .cta{
+    display:inline-block;margin-top:44px;padding:14px 40px;
+    border:1px solid var(--gold);color:var(--gold);text-decoration:none;
+    font-size:14px;letter-spacing:.16em;transition:all .25s
+  }
+  .cta:hover{background:var(--gold);color:#08090B}
+  .hero .note{margin-top:22px;font-size:12.5px;color:var(--fg3);letter-spacing:.05em}
+
+  /* credibility */
+  .cred{background:var(--bg2)}
+  .cred .row{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap}
+  .bignum{font-size:clamp(56px,9vw,92px);font-weight:200;color:var(--gold);letter-spacing:.02em;line-height:1}
+  .cred h2{font-weight:300}
+  .stages{
+    display:flex;gap:0;flex-wrap:wrap;margin-top:40px;
+    border-top:1px solid var(--line)
+  }
+  .stage{
+    flex:1 1 168px;padding:22px 20px 22px 0;border-right:1px solid var(--line);
+    font-size:14.5px;color:var(--fg2);letter-spacing:.06em
+  }
+  .stage:last-child{border-right:none}
+  .stage i{display:block;font-style:normal;font-size:11px;color:var(--fg3);letter-spacing:.2em;margin-bottom:7px}
+
+  /* demo */
+  .demo{background:var(--bg2)}
+  .qa{
+    margin-top:44px;border:1px solid var(--line);background:var(--bg);
+    border-radius:3px;overflow:hidden
+  }
+  .qa .q{
+    padding:24px 30px;border-bottom:1px solid var(--line);
+    font-size:16.5px;color:var(--fg);letter-spacing:.02em
+  }
+  .qa .q i{font-style:normal;color:var(--gold);margin-right:12px;font-size:13px;letter-spacing:.1em}
+  .qa .a{padding:30px;font-size:16px;color:#D8D8DC;font-weight:300;line-height:2.0}
+  .cite{
+    color:var(--gold);border-bottom:1px dashed var(--gold-dim);cursor:pointer;
+    padding:1px 2px;transition:background .2s;white-space:nowrap
+  }
+  .cite:hover{background:var(--gold-bg)}
+  .cite::after{content:"⌄";font-size:11px;margin-left:3px;opacity:.7}
+  .panel{
+    display:none;margin:16px 0 4px;padding:20px 22px;
+    background:var(--gold-bg);border-left:2px solid var(--gold);
+    font-size:14.5px;color:var(--fg2);line-height:1.95
+  }
+  .panel.open{display:block;animation:fade .28s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+  .panel .head{
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    margin-bottom:12px;flex-wrap:wrap
+  }
+  .panel .name{color:var(--gold);font-size:13px;letter-spacing:.1em}
+  .verified{font-size:11.5px;color:#6EBE8A;letter-spacing:.06em;white-space:nowrap}
+  .qa .foot{
+    padding:16px 30px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--fg3);letter-spacing:.04em;
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap
+  }
+  .hint{margin-top:18px;font-size:13px;color:var(--fg3);letter-spacing:.04em}
+
+  /* 五不 */
+  .five{display:grid;gap:0;margin-top:52px}
+  .no{
+    display:grid;grid-template-columns:150px 1fr;gap:34px;
+    padding:34px 0;border-top:1px solid var(--line);align-items:start
+  }
+  .no:last-child{border-bottom:1px solid var(--line)}
+  .no .k{font-size:40px;font-weight:200;color:var(--gold);letter-spacing:.12em;line-height:1.2}
+  .no .say{font-size:19px;font-weight:300;color:var(--fg);letter-spacing:.03em;margin-bottom:12px}
+  .no .fact{font-size:14.5px;color:var(--fg2);font-weight:300;line-height:1.9;max-width:640px}
+  @media(max-width:680px){
+    .no{grid-template-columns:1fr;gap:14px}
+    .no .k{font-size:32px}
+  }
+
+  /* 能力 */
+  .caps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);margin-top:48px;border:1px solid var(--line)}
+  .cap{background:var(--bg);padding:30px 26px}
+  .cap h3{font-size:17px;font-weight:400;letter-spacing:.08em;margin-bottom:12px}
+  .cap p{font-size:14px;color:var(--fg2);font-weight:300;line-height:1.9}
+  .cap i{font-style:normal;display:block;font-size:11px;color:var(--gold);letter-spacing:.2em;margin-bottom:14px}
+
+  /* 分寸 */
+  .stance{background:var(--bg2);text-align:center}
+  .stance h2{font-size:clamp(24px,3.6vw,40px);font-weight:300;line-height:1.7;letter-spacing:.05em}
+  .stance h2 b{color:var(--gold);font-weight:300}
+  .stance p{color:var(--fg2);font-size:16px;font-weight:300;margin-top:26px;max-width:600px;margin-left:auto;margin-right:auto}
+
+  /* cta */
+  .end{text-align:center}
+  .end h2{margin-bottom:14px}
+  footer{border-top:1px solid var(--line);padding:34px 0 46px}
+  .disc{font-size:12.5px;color:var(--fg3);line-height:1.95;max-width:760px}
+  .copy{margin-top:20px;font-size:12px;color:#52525B;letter-spacing:.06em}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <div class="brand"><b>DeepNirvana</b><span>优破案 4.0</span></div>
+  <div class="navlinks">
+    <a href="#demo">看它怎么答</a>
+    <a href="#five">五不</a>
+    <a href="#caps">能力</a>
+    <a href="#where">它在哪</a>
+    <a href="#join">开通内测</a>
+  </div>
+</div></nav>
+
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">优破案 4.0 · 破产管理人的 AI 助手</div>
+  <h1>空口无凭。</h1>
+  <p class="sub">它说的每一句，<b>都得摆出处</b>。</p>
+  <a class="cta" href="#join">优破案用户优先开通</a>
+  <p class="note">邀请制内测中 · 面向破产管理人</p>
+</div></section>
+
+<section class="cred"><div class="wrap">
+  <div class="eyebrow">十年</div>
+  <div class="row">
+    <div class="bignum">十年</div>
+    <h2>管理人用优破案办案。</h2>
+  </div>
+  <p class="lede">从 2014 年第一版产品，到 2016 年公司成立，再到今天——债权申报、债权审查、债权人会议、资产管理、分配，全流程，真实案件。<b style="color:var(--fg);font-weight:400">DeepNirvana 从这里长出来。</b></p>
+  <div class="stages">
+    <div class="stage"><i>01</i>债权申报</div>
+    <div class="stage"><i>02</i>债权审查</div>
+    <div class="stage"><i>03</i>债权人会议</div>
+    <div class="stage"><i>04</i>资产管理</div>
+    <div class="stage"><i>05</i>分配</div>
+  </div>
+</div></section>
+
+<section id="where"><div class="wrap">
+  <div class="eyebrow">它在哪</div>
+  <h2>别的法律 AI 要你把卷宗传过去。<br>它就在你办案的地方。</h2>
+  <p class="lede">DeepNirvana 不是另一个要你重新录一遍数据的系统。案件、债权、申报材料本来就在优破案里，它就长在这儿——你在哪一步卡住，它在哪一步接上。</p>
+  <div class="stages" style="margin-top:46px">
+    <div class="stage"><i>不用搬家</i>案件与材料在原处，不必导出再上传</div>
+    <div class="stage"><i>不用换人</i>还是你熟悉的办案流程，多了一个助手</div>
+    <div class="stage"><i>不用另付费</i>面向优破案管理人用户开放</div>
+  </div>
+</div></section>
+
+<section class="demo" id="demo"><div class="wrap">
+  <div class="eyebrow">现场核一次</div>
+  <h2>别信形容词。点开引证，自己看。</h2>
+  <p class="lede">下面是 DeepNirvana 的一段真实回答。每一处引证都可以就地展开，与法规原文逐字对照——这正是它在你案子里的样子。</p>
+
+  <div class="qa">
+    <div class="q"><i>问</i>债务人在破产申请受理前几个月里偿还了个别债权人的欠款，受理后又付了一笔——这些清偿有效吗？管理人能不能追回？</div>
+    <div class="a">
+      两笔的命运不同，要分开处理——一笔是<b>无效</b>，一笔是<b>可撤销</b>，程序和举证责任完全不一样。
+      <br><br>
+      受理之后那笔最清楚：<span class="cite" data-t="p1">《企业破产法》第十六条</span>规定受理后的个别清偿一律无效。无效是自始无效，不需要起诉撤销，管理人可以直接要求返还。
+      <div class="panel" id="p1">
+        <div class="head">
+          <span class="name">《中华人民共和国企业破产法》第十六条</span>
+          <span class="verified">✓ 与法规库原文逐字一致</span>
+        </div>
+        人民法院受理破产申请后，债务人对个别债权人的债务清偿无效。
+      </div>
+      受理前那几笔要多问一个问题：清偿发生在<b>受理前六个月内</b>吗？当时债务人是否已经具备破产原因？两问都是，管理人可依<span class="cite" data-t="p2">《企业破产法》第三十二条</span>请求法院撤销——注意这是可撤销不是无效，要管理人主动行使，且「个别清偿使债务人财产受益的」不在此列。
+      <div class="panel" id="p2">
+        <div class="head">
+          <span class="name">《中华人民共和国企业破产法》第三十二条</span>
+          <span class="verified">✓ 与法规库原文逐字一致</span>
+        </div>
+        人民法院受理破产申请前六个月内，债务人有本法第二条第一款规定的情形，仍对个别债权人进行清偿的，管理人有权请求人民法院予以撤销。但是，个别清偿使债务人财产受益的除外。
+      </div>
+      实务上还有一层限缩：司法解释对经由诉讼、仲裁、执行程序完成的个别清偿，以及为维持基本生产经营所必需的支付（如劳动报酬、水电费），原则上不支持撤销。核查时建议先钉两个时间锚——受理裁定日，和破产原因成立的时点——再逐笔归入上面两条轨道。
+    </div>
+    <div class="foot">
+      <span>本段引用 2 条依据 · 均已与法规库原文比对</span>
+      <span>取不到正文的，会如实标注，不含糊过去</span>
+    </div>
+  </div>
+  <p class="hint">↑ 点击金色条文，展开原文</p>
+</div></section>
+
+<section id="five"><div class="wrap">
+  <div class="eyebrow">五不</div>
+  <h2>我们没在教它更会说，<br>是在给它划边界。</h2>
+
+  <div class="five">
+    <div class="no">
+      <div class="k">不空口</div>
+      <div>
+        <div class="say">它说的每一句，都得摆出处。</div>
+        <div class="fact">引用的法条会与法规库原文逐字比对，不一致的换回原文。取不到正文时如实标注「该条正文尚未入库」，不含糊过去。</div>
+      </div>
+    </div>
+    <div class="no">
+      <div class="k">不乱猜</div>
+      <div>
+        <div class="say">拿不准的时候，往保守里走。</div>
+        <div class="fact">已废止、已被取代、尚未生效的条文，在检索阶段就被排除。法律依据按《立法法》位阶分层参与排序，分类不确定时按更保守的一档处理。</div>
+      </div>
+    </div>
+    <div class="no">
+      <div class="k">不硬算</div>
+      <div>
+        <div class="say">算不出来的时候，它会停下来问你。</div>
+        <div class="fact">利息按各期 LPR 分段计算，破产受理日按第四十六条自动停息，期中受偿按规则分摊。利率数据超出已收录范围时，不外推、不沿用上一期，直接请你提供——宁可停下，不给一个看起来对的数。</div>
+      </div>
+    </div>
+    <div class="no">
+      <div class="k">不外流</div>
+      <div>
+        <div class="say">材料留在你这边。</div>
+        <div class="fact">敏感材料的文字识别在服务器本机完成，原始图像不出域。法律主链路全部使用国产模型，破产文书生成路径在代码层禁止路由到境外服务。上传的原件与解析文本只增不删，界面上的「移除」只是打标记。</div>
+      </div>
+    </div>
+    <div class="no">
+      <div class="k">不越位</div>
+      <div>
+        <div class="say">判断仍然是你的。</div>
+        <div class="fact">它给依据、给初稿、标出材料缺口，但不替你下结论。每条结论都可一键标记转人工复核；从材料输入到最终成果，关键环节留有过程记录，可凭编号回溯。</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="caps"><div class="wrap">
+  <div class="eyebrow">首批五项能力 · 邀请制内测中</div>
+  <h2>它不是一个聊天框，<br>是五件你每天都要做的事。</h2>
+  <div class="caps">
+    <div class="cap"><i>01</i><h3>破产实务问答</h3><p>只做破产这一件事。每一段答案末尾标出它引了哪几条依据，取不到正文时如实标注，不假装。</p></div>
+    <div class="cap"><i>02</i><h3>企业全息画像</h3><p>输入企业全称，一次拿到完整档案——不是随手搜一下，是一份可以直接进卷的交付物。</p></div>
+    <div class="cap"><i>03</i><h3>债权审查</h3><p>上传申报材料，梳理审查要点、法律依据与材料缺口。供管理人核定，不代为决定。</p></div>
+    <div class="cap"><i>04</i><h3>破产文书编写</h3><p>从受理裁定、申报须知、一债会公告，到分配方案，二十余类文书，可编辑、可导出、可留痕。</p></div>
+    <div class="cap"><i>05</i><h3>会议纪要</h3><p>录音转写为结构化纪要，每一句都带时间锚点，点击即可回听原声核对。</p></div>
+  </div>
+</div></section>
+
+<section class="stance"><div class="wrap">
+  <h2>它不替你决定。<br><b>它把依据端到你面前，等你逐条核。</b></h2>
+  <p>破产案件的每一个判断都要落到人身上。我们能做的，是让你做判断的时候，手边的每一条依据都查得到出处、经得起追问。</p>
+</div></section>
+
+<section class="end" id="join"><div class="wrap">
+  <div class="eyebrow">优先接入</div>
+  <h2>首批五项能力，邀请制内测中。</h2>
+  <p class="lede" style="margin-left:auto;margin-right:auto">优破案管理人用户优先开通。扫码添加，或来信说明机构名称与业务场景。</p>
+  <a class="cta" href="#">优破案用户优先开通</a>
+</div></section>
+
+<footer><div class="wrap">
+  <p class="disc">内容由 AI 生成，仅供参考，不构成法律意见；实际适用须结合具体案情由专业人员判断。DeepNirvana 为破产管理人及律师提供的专业辅助工具，不提供面向当事人的法律服务。</p>
+  <p class="copy">优破案 4.0 · Umob.AI</p>
+</div></footer>
+
+<script>
+  document.querySelectorAll('.cite').forEach(function(c){
+    c.addEventListener('click', function(){
+      var p = document.getElementById(c.dataset.t);
+      if(!p) return;
+      p.classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>
