@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- 最小尺寸变体：只留 U + 星点。轨道弧在 512 画布里从 x=86 拉到 426，
+       缩到 40px 就成了两根横着的"胡须"，识别不出是轨道，反而像渲染出错。 -->
+  <path d="M176 168V282" stroke="#E8BC6E" stroke-width="34" stroke-linecap="round"/>
+  <path d="M336 168V282" stroke="#E8BC6E" stroke-width="34" stroke-linecap="round"/>
+  <path d="M176 282C176 326.183 211.817 362 256 362C300.183 362 336 326.183 336 282" stroke="#E8BC6E" stroke-width="34" stroke-linecap="round"/>
+  <circle cx="374" cy="146" r="34" fill="#D4A24C"/>
+</svg>

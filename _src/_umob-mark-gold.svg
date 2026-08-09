@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Umob.AI 标识的单色金版：从 favicon.svg 提取「U + 轨道 + 星点」，
+       去掉圆角容器、网格底和高斯发光——那三样在 40px 尺寸下只会糊成一团，
+       而且容器的深蓝底和海报的金黑撞色。 -->
+  <path d="M86 244C126 221 189 208 256 208C323 208 386 221 426 244" stroke="#D4A24C" stroke-opacity=".34" stroke-width="7" stroke-linecap="round"/>
+  <path d="M86 196C126 222 189 236 256 236C323 236 386 222 426 196" stroke="#D4A24C" stroke-opacity=".62" stroke-width="7" stroke-linecap="round"/>
+  <path d="M176 162V276" stroke="#E8BC6E" stroke-width="22" stroke-linecap="round"/>
+  <path d="M336 162V276" stroke="#E8BC6E" stroke-width="22" stroke-linecap="round"/>
+  <path d="M176 276C176 320.183 211.817 356 256 356C300.183 356 336 320.183 336 276" stroke="#E8BC6E" stroke-width="22" stroke-linecap="round"/>
+  <path d="M154 224C172 176 214 142 264 142C302 142 338 162 360 194" stroke="#D4A24C" stroke-opacity=".75" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="364" cy="154" r="20" fill="#F0D3A0"/>
+</svg>

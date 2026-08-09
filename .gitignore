@@ -2,3 +2,16 @@
 # 🟥 2026-08-08：字体缓存不进 git（23MB 的 Noto-Serif-SC.ttf）
 # 它是构建期下载/生成的缓存产物，不是源码。
 _src/.font-cache/
+
+# 🟥 2026-08-09 海报/首页这一轮：过程渣不进公开仓。
+# _poster/ 一度到 165 MB —— 诊断图、对比图、每个候选的 1x+2x 渲染、
+# 还有为了评审临时拷进来的 13 MB 设计稿。只留最终交付物。
+.DS_Store
+_src/_tmp-*
+# 导入的设计工程：已归档在顶层仓 Docs/UED/*.zip，不在网站仓重复一份
+_src/_design-import/
+_poster/*
+!_poster/README.md
+!_poster/dn-poster-v8.html
+!_poster/dn-poster-v8-1080x1920.png
+!_poster/dn-poster-v8-2160x3840@2x.png

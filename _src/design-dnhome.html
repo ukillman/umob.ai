@@ -10,7 +10,7 @@
 <helmet data-dc-atomics>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DeepNirvana · 优破案 4.0</title>
-<meta name="description" content="DeepNirvana，优破案 4.0 · 破产管理人的 AI 助手。它说的每一句，都得摆出处。邀请制内测中，面向破产管理人。">
+<meta name="description" content="DeepNirvana 破局，为破产管理人打造的 AI Agent。它说的每一句，都得摆出处。邀请制内测中，面向破产管理人。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
@@ -60,32 +60,37 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
 
   <nav style="position:sticky;top:0;z-index:50;background:rgba(8,9,11,.82);backdrop-filter:blur(14px);border-bottom:1px solid #1E2027">
     <div style="max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,28px);display:flex;align-items:center;justify-content:space-between;gap:16px;height:62px">
-      <div style="display:flex;align-items:baseline;gap:10px;white-space:nowrap;overflow:hidden;min-width:0"><b style="font-size:18px;font-weight:600;letter-spacing:.1em">DeepNirvana<span style="font-size:.5em;vertical-align:super;letter-spacing:0;font-weight:400;color:#71717A">™️</span></b><span style="font-family:'Ma Shan Zheng','PingFang SC',serif;font-size:22px;line-height:1;color:#D4A24C;letter-spacing:.04em">破局</span><span style="color:#71717A;font-size:12px;letter-spacing:.16em;overflow:hidden;text-overflow:ellipsis">优破案 4.0</span></div>
+      <div style="display:flex;align-items:baseline;gap:10px;white-space:nowrap;overflow:hidden;min-width:0"><b style="font-size:18px;font-weight:600;letter-spacing:.1em">DeepNirvana<span style="font-size:.5em;vertical-align:super;letter-spacing:0;font-weight:400;color:#71717A">™</span></b><span style="font-family:'Ma Shan Zheng','PingFang SC',serif;font-size:22px;line-height:1;color:#D4A24C;letter-spacing:.04em">破局</span><span style="color:#71717A;font-size:12px;letter-spacing:.16em;overflow:hidden;text-overflow:ellipsis">优破案 4.0</span></div>
       <div style="display:flex;align-items:center;gap:clamp(14px,3vw,26px);font-size:13px;color:#A1A1AA;letter-spacing:.08em;min-width:0;overflow-x:auto;white-space:nowrap;scrollbar-width:none">
         <a href="#demo" style="color:inherit" style-hover="color:#D4A24C">看它怎么答</a>
         <a href="#five" style="color:inherit" style-hover="color:#D4A24C">五不</a>
         <a href="#caps" style="color:inherit" style-hover="color:#D4A24C">能力</a>
         <a href="#where" style="color:inherit" style-hover="color:#D4A24C">它在哪</a>
-        <button type="button" onClick="{{ openApply }}" style="flex:none;padding:8px 18px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:13px;letter-spacing:.1em;white-space:nowrap;cursor:pointer" style-hover="background:#D4A24C;color:#08090B">参与内测</button>
+        <button type="button" onClick="{{ openApply }}" style="flex:none;padding:8px 18px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:13px;letter-spacing:.1em;white-space:nowrap;cursor:pointer" style-hover="background:#D4A24C;color:#08090B">加入内测</button>
       </div>
     </div>
   </nav>
 
   <section style="position:relative;overflow:hidden;padding:130px 0 108px">
     <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(720px 340px at 50% -12%,rgba(212,162,76,.10),transparent 68%)"></div>
-    <div aria-hidden="true" style="position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);white-space:nowrap;font-family:'Ma Shan Zheng','PingFang SC',serif;font-size:clamp(20rem,58vw,58rem);line-height:.82;letter-spacing:.02em;color:rgba(212,162,76,.045);pointer-events:none;user-select:none">破局</div>
+    <!-- 🟥 字号必须 ≤44vw：「破局」两个字连字距约 2.04 em，超过 49vw 就会被视口从两头切掉，
+     只剩中间一截，读起来像蹭脏了而不是水印。原值 clamp(20rem,58vw,58rem) 在 375px 手机上
+     实测字号 320px、水印宽 653px、只露得出 57%——海报那版翻车是同一个原因。 -->
+    <div aria-hidden="true" style="position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);white-space:nowrap;font-family:'Ma Shan Zheng','PingFang SC',serif;font-size:clamp(7rem,44vw,40rem);line-height:.82;letter-spacing:.02em;color:rgba(212,162,76,.045);pointer-events:none;user-select:none">破局</div>
     <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(8,9,11,.55),rgba(8,9,11,.15) 45%,rgba(8,9,11,.85))"></div>
 
     <div style="position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,28px);text-align:center">
-      <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:22px">优破案 4.0 · 破产管理人的 AI 助手</div>
+      <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:22px">第一轮邀请制内测</div>
+      <div style="margin:0 0 6px;font-size:clamp(20px,3vw,34px);font-weight:200;color:#C9C9CE;letter-spacing:.08em"><span style="font-family:'Ma Shan Zheng','PingFang SC',serif;color:#D4A24C;font-weight:400;font-size:1.16em;line-height:0;position:relative;top:2px">破</span>企业之困，成价值之<span style="font-family:'Ma Shan Zheng','PingFang SC',serif;color:#D4A24C;font-weight:400;font-size:1.16em;line-height:0;position:relative;top:2px">局</span></div>
       <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:clamp(14px,3vw,40px);margin:34px 0 0">
-        <span style="font-size:clamp(40px,8.4vw,104px);font-weight:300;letter-spacing:.02em;line-height:1;color:#F4F4F5;white-space:nowrap">DeepNirvana<span style="font-size:.22em;vertical-align:super;letter-spacing:0;color:#71717A">™️</span></span>
+        <span style="font-size:clamp(40px,8.4vw,104px);font-weight:300;letter-spacing:.02em;line-height:1;color:#F4F4F5;white-space:nowrap">DeepNirvana<span style="font-size:.22em;vertical-align:super;letter-spacing:0;color:#71717A">™</span></span>
         <span style="font-family:'Ma Shan Zheng','PingFang SC',serif;font-size:clamp(48px,9.6vw,118px);line-height:1;letter-spacing:.06em;color:#D4A24C;white-space:nowrap">破局</span>
       </div>
+      <div style="margin:20px 0 0;font-size:clamp(15px,2.2vw,24px);font-weight:300;color:#D4A24C;letter-spacing:.06em">为破产管理人打造的 AI Agent<sup style="color:#8A6A2F;font-size:.55em;letter-spacing:0;margin-left:2px;vertical-align:super">*</sup></div>
       <h1 style="margin:34px 0 0;font-size:clamp(40px,7.4vw,86px);font-weight:300;letter-spacing:.06em;line-height:1.1">空口无凭。</h1>
       <p style="margin:30px 0 0;font-size:clamp(17px,2vw,21px);color:#A1A1AA;font-weight:300;letter-spacing:.03em">它说的每一句，<b style="color:#F4F4F5;font-weight:400">都得摆出处</b>。</p>
-      <button type="button" onClick="{{ openApply }}" style="display:inline-block;margin-top:44px;padding:14px 40px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:14px;letter-spacing:.16em;cursor:pointer;transition:all .25s" style-hover="background:#D4A24C;color:#08090B">帮我们把它用出来</button>
-      <p style="margin:22px 0 0;font-size:12.5px;color:#71717A;letter-spacing:.05em">邀请制内测中 · 面向破产管理人</p>
+      <button type="button" onClick="{{ openApply }}" style="display:inline-block;margin-top:44px;padding:14px 40px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:14px;letter-spacing:.16em;cursor:pointer;transition:all .25s" style-hover="background:#D4A24C;color:#08090B">诚邀您加入内测</button>
+      <p style="margin:22px 0 0;font-size:12.5px;color:#71717A;letter-spacing:.05em">内测面向破产管理人 · 优破案用户优先</p>
     </div>
   </section>
 
@@ -165,8 +170,8 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
       <div style="margin-top:44px;border:1px solid #1E2027;background:#08090B;border-radius:3px;overflow:hidden">
         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:11px clamp(18px,5vw,30px);border-bottom:1px solid #1E2027;background:rgba(212,162,76,.035);font-size:11.5px;letter-spacing:.1em;color:#71717A">
           <span style="width:6px;height:6px;border-radius:50%;background:#D4A24C;flex-shrink:0"></span>
-          <span style="color:#C9C9CE;letter-spacing:.14em">DeepNirvana · 破产实务问答</span>
-          <span style="padding:2px 9px;border:1px solid #8A6A2F;color:#D4A24C;border-radius:2px;font-size:10.5px;letter-spacing:.12em">示例回答 · 网页重排</span>
+          <span style="color:#C9C9CE;letter-spacing:.14em">DeepNirvana · 研判引擎</span>
+          <span style="padding:2px 9px;border:1px solid #8A6A2F;color:#D4A24C;border-radius:2px;font-size:10.5px;letter-spacing:.12em">示例回答 · 网页重排<sup style="color:#8A6A2F;font-size:.55em;letter-spacing:0;margin-left:2px;vertical-align:super">**</sup></span>
           <span style="margin-left:auto;color:#5E5E67">上线前将替换为产品实测回答与真实检索轨迹</span>
         </div>
 
@@ -302,35 +307,36 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
 
   <section id="caps" style="padding:clamp(62px,11vw,104px) 0;border-top:1px solid #1E2027">
     <div style="max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,28px)">
-      <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:22px">首批五项能力 · 邀请制内测中</div>
-      <h2 style="margin:0;font-size:clamp(26px,3.4vw,38px);font-weight:300;letter-spacing:.04em;line-height:1.45">它不是一个聊天框，<br>是五件你每天都要做的事。</h2>
+      <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:22px">场景举例 · 第一轮内测</div>
+      <h2 style="margin:0;font-size:clamp(26px,3.4vw,38px);font-weight:300;letter-spacing:.04em;line-height:1.45">它不是一个聊天框，<br>是你每天都要做的那些事。</h2>
       <div class="caps">
         <div style="background:#08090B;padding:30px 26px">
-          <i style="font-style:normal;display:block;font-size:11px;color:#D4A24C;letter-spacing:.2em;margin-bottom:14px">01</i>
-          <h3 style="margin:0 0 12px;font-size:17px;font-weight:400;letter-spacing:.08em">破产实务问答</h3>
+          <i style="font-style:normal;display:block;width:7px;height:7px;background:#D4A24C;transform:rotate(45deg);margin:4px 0 20px"></i>
+          <h3 style="margin:0 0 12px;font-size:17px;font-weight:400;letter-spacing:.08em">破产实务研判</h3>
           <p style="margin:0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">只做破产这一件事。每一段答案末尾标出它引了哪几条依据，取不到正文时如实标注，不假装。</p>
         </div>
         <div style="background:#08090B;padding:30px 26px">
-          <i style="font-style:normal;display:block;font-size:11px;color:#D4A24C;letter-spacing:.2em;margin-bottom:14px">02</i>
-          <h3 style="margin:0 0 12px;font-size:17px;font-weight:400;letter-spacing:.08em">企业全息画像</h3>
-          <p style="margin:0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">输入企业全称，一次拿到完整档案——不是随手搜一下，是一份可以直接进卷的交付物。</p>
-        </div>
-        <div style="background:#08090B;padding:30px 26px">
-          <i style="font-style:normal;display:block;font-size:11px;color:#D4A24C;letter-spacing:.2em;margin-bottom:14px">03</i>
+          <i style="font-style:normal;display:block;width:7px;height:7px;background:#D4A24C;transform:rotate(45deg);margin:4px 0 20px"></i>
           <h3 style="margin:0 0 12px;font-size:17px;font-weight:400;letter-spacing:.08em">债权审查</h3>
           <p style="margin:0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">上传申报材料，梳理审查要点、法律依据与材料缺口。供管理人核定，不代为决定。</p>
         </div>
         <div style="background:#08090B;padding:30px 26px">
-          <i style="font-style:normal;display:block;font-size:11px;color:#D4A24C;letter-spacing:.2em;margin-bottom:14px">04</i>
-          <h3 style="margin:0 0 12px;font-size:17px;font-weight:400;letter-spacing:.08em">破产文书编写</h3>
+          <i style="font-style:normal;display:block;width:7px;height:7px;background:#D4A24C;transform:rotate(45deg);margin:4px 0 20px"></i>
+          <h3 style="margin:0 0 12px;font-size:17px;font-weight:400;letter-spacing:.08em">企业全息画像</h3>
+          <p style="margin:0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">输入企业全称，一次拿到完整档案——不是随手搜一下，是一份可以直接进卷的交付物。</p>
+        </div>
+        <div style="background:#08090B;padding:30px 26px">
+          <i style="font-style:normal;display:block;width:7px;height:7px;background:#D4A24C;transform:rotate(45deg);margin:4px 0 20px"></i>
+          <h3 style="margin:0 0 12px;font-size:17px;font-weight:400;letter-spacing:.08em">破产文书</h3>
           <p style="margin:0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">从受理裁定、申报须知、一债会公告，到分配方案，二十余类文书，可编辑、可导出、可留痕。</p>
         </div>
         <div style="background:#08090B;padding:30px 26px">
-          <i style="font-style:normal;display:block;font-size:11px;color:#D4A24C;letter-spacing:.2em;margin-bottom:14px">05</i>
+          <i style="font-style:normal;display:block;width:7px;height:7px;background:#D4A24C;transform:rotate(45deg);margin:4px 0 20px"></i>
           <h3 style="margin:0 0 12px;font-size:17px;font-weight:400;letter-spacing:.08em">会议纪要</h3>
           <p style="margin:0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">录音转写为结构化纪要，每一句都带时间锚点，点击即可回听原声核对。</p>
         </div>
       </div>
+      <p style="margin:26px 0 0;font-size:14.5px;color:#8A8A93;font-weight:300;line-height:1.95;text-wrap:pretty">这只是几个常见场景。同一个对话里还能直接调用<b style="color:#C9C9CE;font-weight:400">利息分段计算</b>（破产受理日自动停息，超出利率表截止日不外推）、<b style="color:#C9C9CE;font-weight:400">法定期限计算</b>（当日不计入、节假日顺延）、<b style="color:#C9C9CE;font-weight:400">LPR 查询</b>、<b style="color:#C9C9CE;font-weight:400">金额大写与清偿比例试算</b>——它们和债权审查、文书共用同一套引擎和同一张利率表，对话里、审查里、文书里，同样的输入得出同样的数。</p>
     </div>
   </section>
 
@@ -344,16 +350,16 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
   <section id="join" style="padding:clamp(62px,11vw,104px) 0;border-top:1px solid #1E2027;text-align:center">
     <div style="max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,28px)">
       <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:22px">优先接入</div>
-      <h2 style="margin:0 0 14px;font-size:clamp(26px,3.4vw,38px);font-weight:300;letter-spacing:.04em;line-height:1.45">首批五项能力，邀请制内测中。</h2>
-      <p style="color:#A1A1AA;font-size:17px;font-weight:300;max-width:660px;margin:20px auto 0;text-wrap:pretty">首批 {{ batch }} 位。想请正在办案的管理人，在真实案子里用一用，告诉我们哪里不对、哪里该改——名额优先给正在使用优破案的机构。</p>
-      <button type="button" onClick="{{ openApply }}" style="display:inline-block;margin-top:44px;padding:14px 40px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:14px;letter-spacing:.16em;cursor:pointer;transition:all .25s" style-hover="background:#D4A24C;color:#08090B">优破案用户优先开通</button>
+      <h2 style="margin:0 0 14px;font-size:clamp(26px,3.4vw,38px);font-weight:300;letter-spacing:.04em;line-height:1.45">第一轮内测中。</h2>
+      <p style="color:#A1A1AA;font-size:17px;font-weight:300;max-width:660px;margin:20px auto 0;text-wrap:pretty">优破案用户优先。想请破产管理人在真实案子里用一用，告诉我们哪里不对、哪里该改。</p>
+      <button type="button" onClick="{{ openApply }}" style="display:inline-block;margin-top:44px;padding:14px 40px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-family:inherit;font-size:14px;letter-spacing:.16em;cursor:pointer;transition:all .25s" style-hover="background:#D4A24C;color:#08090B">诚邀您加入内测</button>
     </div>
   </section>
 
   <footer style="border-top:1px solid #1E2027;padding:34px 0 46px">
     <div style="max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,28px)">
-      <p style="margin:0;font-size:12.5px;color:#71717A;line-height:1.95;max-width:760px;text-wrap:pretty">内容由 AI 生成，仅供参考，不构成法律意见；实际适用须结合具体案情由专业人员判断。DeepNirvana 为破产管理人及律师提供的专业辅助工具，不提供面向当事人的法律服务。</p>
-      <p style="margin:20px 0 0;font-size:12px;color:#52525B;letter-spacing:.06em">优破案 4.0 · Umob.AI</p>
+      <p style="margin:0;font-size:12.5px;color:#71717A;line-height:2.05;max-width:820px;text-wrap:pretty"><b style="color:#8A6A2F;font-weight:400">*</b> 本产品为破产实务专业系统，仅供依法担任破产管理人的机构及专业人士使用；不对社会公众开放，也不面向案件当事人。<br><b style="color:#8A6A2F;font-weight:400">**</b> DeepNirvana 给出的内容由 AI 生成，仅供参考，不构成法律意见；实际适用须结合案情由专业人员判断。</p>
+      <p style="margin:20px 0 0;font-size:12px;color:#52525B;letter-spacing:.06em">优破案 4.0 · Umob.AI · www.umobai.com<br><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" style="color:#52525B;text-decoration:none">浙ICP备16042905号</a></p>
     </div>
   </footer>
 
@@ -365,30 +371,23 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
         <sc-if value="{{ stepGate }}" hint-placeholder-val="{{ true }}">
           <div style="animation:fade .3s ease">
             <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:14px">参与内测</div>
-            <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">首批 {{ batch }} 位。</h3>
-            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">想请正在办案的管理人，帮我们把它用出来。名额优先给正在使用优破案的机构——留个联系方式，开放时告诉你。</p>
-            <div style="font-size:16px;color:#F4F4F5;margin:26px 0 16px;letter-spacing:.03em">你目前是否担任破产管理人？</div>
+            <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">第一轮内测，优破案用户优先。</h3>
+            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">想请破产管理人试用之后，指出哪里不对、哪里该改——留个联系方式，开放时告诉你。</p>
+            <div style="font-size:16px;color:#F4F4F5;margin:26px 0 16px;letter-spacing:.03em">你或你所在机构，目前是否担任破产管理人？</div>
             <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <button type="button" onClick="{{ goForm }}" style="padding:12px 24px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .2s" style-hover="background:#D4A24C;color:#08090B">是，我正在办案</button>
+              <button type="button" onClick="{{ goForm }}" style="padding:12px 24px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .2s" style-hover="background:#D4A24C;color:#08090B">是，我是破产管理人</button>
               <button type="button" onClick="{{ goWait }}" style="padding:12px 24px;border:1px solid #1E2027;background:none;color:#A1A1AA;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .2s" style-hover="border-color:#8A6A2F;color:#F4F4F5">不是</button>
             </div>
           </div>
         </sc-if>
 
         <sc-if value="{{ stepWait }}" hint-placeholder-val="{{ false }}">
-          <form onSubmit="{{ submitWait }}" style="animation:fade .3s ease">
-            <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:14px">这一批可能排不上</div>
-            <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">先记下你。</h3>
-            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">首批只开放给正在办案的管理人——不是设门槛，是名额实在太少，我们想先听办案的人怎么说。</p>
-            <p style="margin:8px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">后续批次开放时告诉你。留个手机号就行，别的都不用填。</p>
-            <div style="margin-top:18px">
-              <label style="display:block;font-size:12px;color:#71717A;letter-spacing:.1em;margin-bottom:7px">手机号</label>
-              <input name="phone" type="tel" placeholder="11 位手机号" maxlength="11" inputmode="numeric" style="width:100%;padding:11px 13px;background:#08090B;border:1px solid #1E2027;color:#F4F4F5;font-size:14.5px;font-family:inherit;border-radius:2px">
-            </div>
-            <div style="font-size:12.5px;color:#C2707A;margin-top:12px;min-height:17px">{{ waitErr }}</div>
-            <button type="submit" style="width:100%;margin-top:22px;padding:14px;border:1px solid #D4A24C;background:none;color:#D4A24C;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit;transition:all .2s" style-hover="background:#D4A24C;color:#08090B">加入通知名单</button>
-            <button type="button" onClick="{{ closeApply }}" style="width:100%;border:none;background:none;color:#71717A;padding:12px 0;font-size:13px;font-family:inherit;cursor:pointer" style-hover="color:#D4A24C">先不用了</button>
-          </form>
+          <div style="animation:fade .3s ease">
+            <div style="font-size:12px;letter-spacing:.22em;color:#D4A24C;font-weight:500;margin-bottom:14px">使用范围</div>
+            <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">感谢你的支持和理解。</h3>
+            <p style="margin:16px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.95;text-wrap:pretty">本产品为破产实务专业系统，仅供依法担任破产管理人的机构及专业人士使用；不对社会公众开放，也不面向案件当事人。</p>
+            <button type="button" onClick="{{ closeApply }}" style="width:100%;margin-top:26px;padding:14px;border:1px solid #1E2027;background:none;color:#A1A1AA;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit" style-hover="border-color:#8A6A2F;color:#F4F4F5">关闭</button>
+          </div>
         </sc-if>
 
         <sc-if value="{{ stepForm }}" hint-placeholder-val="{{ false }}">
@@ -458,17 +457,8 @@ input:focus,select:focus{outline:none;border-color:#8A6A2F!important}
           <div style="animation:fade .3s ease">
             <div style="font-size:34px;color:#D4A24C;line-height:1;margin-bottom:18px">✓</div>
             <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">收到了。</h3>
-            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">先把话说在前面：首批只有 {{ batch }} 位，<b style="color:#F4F4F5;font-weight:400">优先给正在使用优破案的管理人</b>——免得你干等。</p>
+            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">先把话说在前面：<b style="color:#F4F4F5;font-weight:400">优破案用户优先</b>——免得你干等。</p>
             <div style="margin-top:22px;padding:14px 16px;border-left:2px solid #8A6A2F;background:rgba(212,162,76,.08);font-size:13px;color:#A1A1AA;line-height:1.9">你留的联系方式我们收着了。下一批开放时短信告诉你，不用再填一次。在那之前不会给你发别的东西。</div>
-            <button type="button" onClick="{{ closeApply }}" style="width:100%;margin-top:22px;padding:14px;border:1px solid #1E2027;background:none;color:#A1A1AA;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit" style-hover="border-color:#8A6A2F;color:#F4F4F5">关闭</button>
-          </div>
-        </sc-if>
-
-        <sc-if value="{{ stepDoneWait }}" hint-placeholder-val="{{ false }}">
-          <div style="animation:fade .3s ease">
-            <div style="font-size:34px;color:#D4A24C;line-height:1;margin-bottom:18px">✓</div>
-            <h3 style="margin:0;font-size:23px;font-weight:300;letter-spacing:.05em;line-height:1.5">记下了。</h3>
-            <p style="margin:14px 0 0;font-size:14px;color:#A1A1AA;font-weight:300;line-height:1.9;text-wrap:pretty">下一批开放时短信通知你。在那之前不会给你发别的东西。</p>
             <button type="button" onClick="{{ closeApply }}" style="width:100%;margin-top:22px;padding:14px;border:1px solid #1E2027;background:none;color:#A1A1AA;font-size:14px;letter-spacing:.06em;cursor:pointer;font-family:inherit" style-hover="border-color:#8A6A2F;color:#F4F4F5">关闭</button>
           </div>
         </sc-if>

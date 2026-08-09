@@ -115,6 +115,9 @@ def build(key: str) -> None:
     # 只查真外链（href/src/@import），不查注释里提到的域名——
     # 上面那段说明本身就写着 fonts.googleapis.com，按字面 grep 会自己绊自己。
     ext = re.findall(r'(?:href|src)="(https?://[^"]+)"|@import[^;]*?(https?://[^\s;\'"]+)', html)
+    # 唯一白名单：ICP 备案号按工信部要求必须链到备案管理系统，不算"外链资源"。
+    # 它不阻塞渲染、不加载任何资源，只是一个 <a>。
+    ext = [e for e in ext if "beian.miit.gov.cn" not in (e[0] or e[1])]
     # 自检：`<span data-txt=...>` 绝不能出现在属性值里。出现即说明某条属性绑定
     # 没被上面的规则接住，生成了嵌套引号的坏标签（按钮会静默失效，不报错）。
     bad = re.findall(r'=\"[^\"]*<span data-txt', html)

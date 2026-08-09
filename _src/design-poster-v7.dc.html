@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepNirvana · 扫码海报（版式七·理念对句）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#050506;color:#F4F4F5;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+
+/* 细颗粒。两个作用：
+   ① 顶部径向渐变在 8 bit 下每 4px 跳一级，暗场手机上是可见的同心圈——颗粒把台阶打碎；
+   ② 微信会把海报重新压成 JPEG，纯净大色块最容易压出 8×8 方块，有颗粒垫底反而更稳。
+   原设计这里放的是一个 1180px 的「破局」水印，但两个字合起来 2600px 宽、
+   画布只有 1080px，实际只露出中间一截，看着像蹭脏了。已删。 */
+.grain{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.055;
+  background-repeat:repeat;background-size:180px 180px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E")}
+</style>
+<template id="__bundler_thumbnail" data-bg-color="#08090B">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#08090B"></rect>
+    <rect x="480" y="230" width="240" height="240" fill="none" stroke="#D4A24C" stroke-width="4"></rect>
+    <text x="600" y="390" text-anchor="middle" font-family="serif" font-size="118" fill="#D4A24C">破局</text>
+    <text x="600" y="590" text-anchor="middle" font-family="sans-serif" font-size="38" letter-spacing="8" fill="#A1A1AA">DeepNirvana</text>
+  </svg>
+</template>
+</helmet>
+
+<section id="poster" style="width:1080px;height:1920px;position:relative;overflow:hidden;background:#08090B;color:#F4F4F5;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;display:flex;flex-direction:column">
+
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(760px 520px at 50% 6%,rgba(212,162,76,.13),transparent 66%)"></div>
+  <div aria-hidden="true" class="grain"></div>
+  <div aria-hidden="true" style="position:absolute;z-index:0;left:0;right:0;top:24.5%;transform:translateY(-50%);text-align:center;
+    font-family:'Ma Shan Zheng','Songti SC',serif;font-size:620px;line-height:1;color:rgba(212,162,76,.10);pointer-events:none;user-select:none">破</div>
+  <div aria-hidden="true" style="position:absolute;z-index:0;left:0;right:0;top:56.5%;transform:translateY(-50%);text-align:center;
+    font-family:'Ma Shan Zheng','Songti SC',serif;font-size:620px;line-height:1;color:rgba(212,162,76,.10);pointer-events:none;user-select:none">局</div>
+  <!-- 金线框放在最上层（z-index 3）：原设计里它被底部二维码面板压掉了下半截，
+       左右两条竖线到面板顶就断了，看着像没画完。 -->
+  <div aria-hidden="true" style="position:absolute;inset:44px;border:1px solid rgba(212,162,76,.20);pointer-events:none;z-index:3"></div>
+
+  <!-- 三层品牌架构（罗师傅 2026-08-08 定）：
+         中文理念 破局 → 英文品牌 DeepNirvana™ → 产品定位 破产实务 AI Agent。
+       眉标里原来的 DeepNirvana™ 和 Agent 已经各自有了自己的位置，留在眉标就是说两遍，
+       所以眉标缩回只报出品方和阶段。要改回来把这一行换掉即可，其余不用动。 -->
+  <div style="position:relative;z-index:1;padding:100px 96px 0;text-align:center">
+    <div style="font-size:24px;letter-spacing:.34em;text-indent:.34em;color:#D4A24C;font-weight:500">优破案 4.0 · 邀请制内测</div>
+
+    <!-- 「破局」已经是背景主视觉，前景不再重复放一遍；两行释义就是它的题解。
+         释义两行做成 inline-block 左对齐再整体居中，「破」「局」两个字头才竖直对齐。 -->
+    <!-- 理念层对句：首尾两个金字自己拼出「破局」，得靠颜色标出来才看得见。
+         「破企业之困，成价值之局」说的是**破产重整本身**的目的（企业涅槃重生），
+         对应品牌名里的 Nirvana。它是理念，不是功能承诺——所以必须排在
+         「为破产管理人量身打造的 AI」**上面**、和它分层，不能读成 AI 的交付物。
+         同屏还有五不的「不越位／你来判」和页脚免责兜着整体印象。 -->
+    <div style="margin-top:158px;font-size:56px;font-weight:200;color:#C9C9CE;letter-spacing:.1em;text-indent:.1em">
+      <span style="font-family:'Ma Shan Zheng','Songti SC',serif;color:#D4A24C;font-weight:400;font-size:1.16em;line-height:0;position:relative;top:3px">破</span>企业之困，成价值之<span style="font-family:'Ma Shan Zheng','Songti SC',serif;color:#D4A24C;font-weight:400;font-size:1.16em;line-height:0;position:relative;top:3px">局</span></div>
+
+    <div style="font-size:92px;font-weight:300;letter-spacing:.16em;color:#F4F4F5;margin-top:150px">DeepNirvana<span style="font-size:.30em;vertical-align:super;letter-spacing:0;color:#8A8A93">™</span></div>
+    <div style="font-size:42px;font-weight:300;letter-spacing:.06em;text-indent:.06em;color:#D4A24C;margin-top:20px"><span style="font-family:'Ma Shan Zheng','Songti SC',serif;font-size:1.16em;line-height:0;position:relative;top:2px">破局</span>，为破产管理人量身打造的 AI</div>
+
+    <div style="width:56px;height:1px;background:#8A6A2F;margin:44px auto"></div>
+    <div style="font-size:100px;font-weight:200;letter-spacing:.1em;text-indent:.1em;line-height:1.1;color:#F4F4F5">空口无凭<span style="margin-right:-.56em">。</span></div>
+  </div>
+
+  <div style="position:relative;z-index:1;margin:0 96px;padding:40px 0 0;flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid #1E2027;border-bottom:1px solid #1E2027">
+      <div style="padding:36px 0;text-align:center;border-right:1px solid #1E2027"><div style="font-size:40px;font-weight:200;color:#D4A24C;letter-spacing:.1em;text-indent:.1em">不空口</div><div style="font-size:20px;color:#8A8A93;margin-top:16px;letter-spacing:.08em;text-indent:.08em">摆出处</div></div>
+      <div style="padding:36px 0;text-align:center;border-right:1px solid #1E2027"><div style="font-size:40px;font-weight:200;color:#D4A24C;letter-spacing:.1em;text-indent:.1em">不乱猜</div><div style="font-size:20px;color:#8A8A93;margin-top:16px;letter-spacing:.08em;text-indent:.08em">只引现行</div></div>
+      <div style="padding:36px 0;text-align:center;border-right:1px solid #1E2027"><div style="font-size:40px;font-weight:200;color:#D4A24C;letter-spacing:.1em;text-indent:.1em">不硬算</div><div style="font-size:20px;color:#8A8A93;margin-top:16px;letter-spacing:.08em;text-indent:.08em">先问你</div></div>
+      <!-- 「不出域」是团队明令不许对外说的话（内测形态下答案生成走阿里云公网端点）。
+           站得住的只有窄的那一条：敏感材料的文字识别在服务器本机完成、原始图像不出域。
+           所以这一格宁可多两个字、破掉三字对仗，也不能留下那个大口径。 -->
+      <div style="padding:36px 0;text-align:center;border-right:1px solid #1E2027"><div style="font-size:40px;font-weight:200;color:#D4A24C;letter-spacing:.1em;text-indent:.1em">不外流</div><div style="font-size:20px;color:#8A8A93;margin-top:16px;letter-spacing:.08em;text-indent:.08em">原图不外传</div></div>
+      <div style="padding:36px 0;text-align:center"><div style="font-size:40px;font-weight:200;color:#D4A24C;letter-spacing:.1em;text-indent:.1em">不越位</div><div style="font-size:20px;color:#8A8A93;margin-top:16px;letter-spacing:.08em;text-indent:.08em">你来判</div></div>
+    </div>
+    <div style="margin-top:34px;text-align:center;font-size:19px;letter-spacing:.24em;text-indent:.24em;color:#B08544;font-weight:500">首批五项能力</div>
+    <div style="margin-top:18px;text-align:center;font-size:24px;color:#A1A1AA;font-weight:300;letter-spacing:.06em;text-indent:.06em">破产实务问答 · 企业全息画像 · 债权审查 · 破产文书编写 · 会议纪要</div>
+  </div>
+
+  <div style="position:relative;z-index:1;margin:0 44px 44px;border-top:1px solid rgba(212,162,76,.20);background:#0D0E11">
+    <div style="padding:52px;display:flex;align-items:center;gap:48px">
+      <div style="flex:none;width:300px;height:300px;background:#FFFFFF;padding:14px">
+        <image-slot id="dn-poster-qr" style="width:100%;height:100%" placeholder="内测申请页二维码"></image-slot>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div style="display:inline-block;padding:10px 24px;border:1px solid #D4A24C;background:rgba(212,162,76,.10);color:#D4A24C;font-size:25px;letter-spacing:.1em;text-indent:.1em;font-weight:500">面向正在办案的破产管理人</div>
+        <div style="font-size:44px;font-weight:300;letter-spacing:.08em;color:#F4F4F5;line-height:1.38;margin-top:22px">长按识别二维码<br>申请内测资格</div>
+        <div style="font-size:22px;color:#A1A1AA;font-weight:300;letter-spacing:.04em;margin-top:20px;line-height:1.75">首批 5–10 位 · 已在用优破案的管理人优先<br>不是管理人也可留手机号，下一批开放时通知你</div>
+      </div>
+    </div>
+    <!-- 《生成式人工智能服务管理暂行办法》12 条、《互联网信息服务深度合成管理规定》17 条
+         要求对 AI 生成内容作显著标识；产品内三处已签同一口径，海报是公开投放物，不能只有产品里有。 -->
+    <div style="padding:24px 52px 30px;border-top:1px solid #1E2027;display:flex;align-items:flex-end;justify-content:space-between;gap:32px">
+      <div style="font-size:18px;color:#8A8A93;font-weight:300;line-height:1.7">内容由 AI 生成，仅供参考，不构成法律意见。<br>面向破产管理人及律师的专业辅助工具，不提供面向当事人的法律服务。</div>
+      <div style="flex:none;font-size:18px;color:#71717A;letter-spacing:.1em;white-space:nowrap">优破案 4.0 · Umob.AI</div>
+    </div>
+  </div>
+
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1080,&quot;height&quot;:1920}}"></script>
+</body>
+</html>

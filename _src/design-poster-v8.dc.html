@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepNirvana · 扫码海报（版式七·理念对句）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#050506;color:#F4F4F5;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+
+/* 细颗粒。两个作用：
+   ① 顶部径向渐变在 8 bit 下每 4px 跳一级，暗场手机上是可见的同心圈——颗粒把台阶打碎；
+   ② 微信会把海报重新压成 JPEG，纯净大色块最容易压出 8×8 方块，有颗粒垫底反而更稳。
+   原设计这里放的是一个 1180px 的「破局」水印，但两个字合起来 2600px 宽、
+   画布只有 1080px，实际只露出中间一截，看着像蹭脏了。已删。 */
+.grain{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.055;
+  background-repeat:repeat;background-size:180px 180px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E")}
+</style>
+<template id="__bundler_thumbnail" data-bg-color="#08090B">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#08090B"></rect>
+    <rect x="480" y="230" width="240" height="240" fill="none" stroke="#D4A24C" stroke-width="4"></rect>
+    <text x="600" y="390" text-anchor="middle" font-family="serif" font-size="118" fill="#D4A24C">破局</text>
+    <text x="600" y="590" text-anchor="middle" font-family="sans-serif" font-size="38" letter-spacing="8" fill="#A1A1AA">DeepNirvana</text>
+  </svg>
+</template>
+</helmet>
+
+<section id="poster" style="width:1080px;height:1920px;position:relative;overflow:hidden;background:#08090B;color:#F4F4F5;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif;display:flex;flex-direction:column">
+
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(760px 520px at 50% 6%,rgba(212,162,76,.13),transparent 66%)"></div>
+  <div aria-hidden="true" class="grain"></div>
+  <!-- 背景「破局」横排，压在产品区（空口无凭 → 五不 → 能力清单，实测 y 1290–1732，中心 1511）。
+       罗师傅 2026-08-08 指定位置。上半品牌区留空——那块现在只有文字，干净。
+       字号 430px：两个字连字距刚好铺满 928px，画布 1080px 左右各留 76px，**整字不裁**（实测框内 x 84–960，未出框）；毛笔墨迹不在字身正中，右推 18px 才视觉居中。
+       原稿翻车就是因为 1180px 的两个字被 1080 画布切掉了两头。 -->
+  <div aria-hidden="true" style="position:absolute;z-index:0;left:0;right:0;top:78.7%;transform:translate(18px,-50%);text-align:center;
+    font-family:'Ma Shan Zheng','Songti SC',serif;font-size:430px;line-height:1;letter-spacing:.16em;text-indent:.16em;
+    color:rgba(212,162,76,.10);pointer-events:none;user-select:none">破局</div>
+  <!-- 金线框放在最上层（z-index 3）：原设计里它被底部二维码面板压掉了下半截，
+       左右两条竖线到面板顶就断了，看着像没画完。 -->
+  <div aria-hidden="true" style="position:absolute;inset:44px;border:1px solid rgba(212,162,76,.20);pointer-events:none;z-index:3"></div>
+  <div style="position:absolute;z-index:2;right:76px;top:72px;text-align:right;line-height:1.5;white-space:nowrap">
+    <div style="font-size:21px;color:#A1A1AA;letter-spacing:.1em;margin-right:-.1em">优破案 4.0</div>
+    <div style="font-size:18px;color:#71717A;letter-spacing:.05em;margin-right:-.05em">DeepNirvana<span style="font-size:.62em;vertical-align:super;letter-spacing:0">™</span> 破产实务引擎</div>
+    <div style="margin-top:8px;font-size:16px;color:#5E5E67;letter-spacing:.06em;margin-right:-.06em">www.umobai.com</div>
+  </div>
+
+  <!-- 版面分三段（罗师傅 2026-08-08 定）：
+         上＝产品叫什么、什么意思（理念/品牌/定位）
+         中＝扫码入口，用一条实底带子把上下切开
+         下＝产品介绍，以「空口无凭。」作段标题
+       扫码带居中而不是左右分栏：它现在落在版心正中，分栏会显得整张图偏一边。 -->
+
+  <!-- 三层品牌架构：中文理念 破局 → 英文品牌 DeepNirvana™ → 产品定位。 -->
+  <div style="position:relative;z-index:1;padding:96px 96px 0;text-align:center">
+    <div style="font-size:24px;letter-spacing:.34em;text-indent:.34em;color:#D4A24C;font-weight:500">第一轮邀请制内测</div>
+
+    <!-- 理念层对句：首尾两个金字自己拼出「破局」，靠毛笔体和金色标出来才看得见。
+         「破企业之困，成价值之局」说的是破产重整本身的目的（企业涅槃重生），对应品牌名里的
+         Nirvana。它是理念、不是功能承诺——所以必须排在「为破产管理人量身打造的 AI」上面。 -->
+    <div style="margin-top:92px;font-size:56px;font-weight:200;color:#C9C9CE;letter-spacing:.1em;text-indent:.1em">
+      <span style="font-family:'Ma Shan Zheng','Songti SC',serif;color:#D4A24C;font-weight:400;font-size:1.16em;line-height:0;position:relative;top:3px">破</span>企业之困，成价值之<span style="font-family:'Ma Shan Zheng','Songti SC',serif;color:#D4A24C;font-weight:400;font-size:1.16em;line-height:0;position:relative;top:3px">局</span></div>
+
+    <div style="font-size:92px;font-weight:300;letter-spacing:.16em;color:#F4F4F5;margin-top:96px">DeepNirvana<span style="font-size:.30em;vertical-align:super;letter-spacing:0;color:#8A8A93">™</span></div>
+    <div style="font-size:36px;font-weight:300;letter-spacing:.06em;text-indent:.06em;color:#D4A24C;margin-top:24px"><span style="font-family:'Ma Shan Zheng','Songti SC',serif;font-size:65px;line-height:0;position:relative;top:6px">破局</span>，为破产管理人打造的 AI Agent</div>
+  </div>
+
+  <!-- 扫码带：上下各一条金线 + 实底，把品牌区和产品区切开 -->
+  <div style="position:relative;z-index:1;flex:none;margin:64px 44px 0;padding:44px 52px 46px;text-align:center;
+       background:#0D0E11;border-top:1px solid rgba(212,162,76,.20);border-bottom:1px solid rgba(212,162,76,.20)">
+    <div style="width:320px;height:320px;background:#FFFFFF;padding:14px;margin:0 auto">
+      <image-slot id="dn-poster-qr" style="width:100%;height:100%" placeholder="内测申请页二维码"></image-slot>
+    </div>
+    <div style="font-size:38px;font-weight:300;letter-spacing:.08em;text-indent:.08em;color:#F4F4F5;margin-top:28px">长按识别二维码，申请内测资格</div>
+    <div style="font-size:23px;color:#A1A1AA;font-weight:300;letter-spacing:.05em;text-indent:.05em;margin-top:18px">内测面向破产管理人，优破案用户优先</div>
+  </div>
+
+  <!-- 产品区：「空口无凭。」当段标题，底下才是五不和能力清单 -->
+  <div style="position:relative;z-index:1;margin:0 96px;padding:40px 0 0;flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center">
+    <div style="font-size:84px;font-weight:200;letter-spacing:.1em;text-indent:.1em;line-height:1.1;color:#F4F4F5">空口无凭<span style="margin-right:-.56em">。</span></div>
+    <div style="font-size:26px;color:#A1A1AA;font-weight:300;letter-spacing:.06em;text-indent:.06em;margin-top:22px">它说的每一句，<span style="color:#F4F4F5;font-weight:400">都得摆出处</span><span style="margin-right:-.56em">。</span></div>
+
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid #1E2027;border-bottom:1px solid #1E2027;margin-top:40px">
+      <div style="padding:30px 0;border-right:1px solid #1E2027"><div style="font-size:38px;font-weight:200;color:#D4A24C;letter-spacing:.1em;text-indent:.1em">不空口</div><div style="font-size:20px;color:#8A8A93;margin-top:14px;letter-spacing:.08em;text-indent:.08em">摆出处</div></div>
+      <div style="padding:30px 0;border-right:1px solid #1E2027"><div style="font-size:38px;font-weight:200;color:#D4A24C;letter-spacing:.1em;text-indent:.1em">不乱猜</div><div style="font-size:20px;color:#8A8A93;margin-top:14px;letter-spacing:.08em;text-indent:.08em">只引现行</div></div>
+      <div style="padding:30px 0;border-right:1px solid #1E2027"><div style="font-size:38px;font-weight:200;color:#D4A24C;letter-spacing:.1em;text-indent:.1em">不硬算</div><div style="font-size:20px;color:#8A8A93;margin-top:14px;letter-spacing:.08em;text-indent:.08em">先问你</div></div>
+      <!-- 「不出域」是团队明令不许对外说的话；站得住的只有窄的这条：原图不外传。 -->
+      <div style="padding:30px 0;border-right:1px solid #1E2027"><div style="font-size:38px;font-weight:200;color:#D4A24C;letter-spacing:.1em;text-indent:.1em">不外流</div><div style="font-size:20px;color:#8A8A93;margin-top:14px;letter-spacing:.08em;text-indent:.08em">原图不外传</div></div>
+      <div style="padding:30px 0"><div style="font-size:38px;font-weight:200;color:#D4A24C;letter-spacing:.1em;text-indent:.1em">不越位</div><div style="font-size:20px;color:#8A8A93;margin-top:14px;letter-spacing:.08em;text-indent:.08em">你来判</div></div>
+    </div>
+  </div>
+
+  <!-- 页脚：AI 披露留在最底下，不跟着二维码上移 -->
+  <div style="position:relative;z-index:1;margin:0 44px 64px;padding:24px 32px 0 8px;border-top:1px solid #1E2027;display:flex;align-items:flex-end;justify-content:space-between;gap:32px">
+    <div style="font-size:18px;color:#8A8A93;font-weight:300;line-height:1.7;text-align:left">内容由 AI 生成，仅供参考，不构成法律意见。<br>面向破产管理人及律师的专业辅助工具，不提供面向当事人的法律服务。</div>
+    <img alt="umobai" src="data:image/png;base64,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" style="flex:none;width:158px;display:block">
+  </div>
+
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1080,&quot;height&quot;:1920}}"></script>
+</body>
+</html>

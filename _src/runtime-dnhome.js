@@ -3,7 +3,7 @@
  * 设计稿自带的 DCLogic 是设计工具的运行时，不进生产。这里用原生 JS 复刻它的
  * 全部行为，计算逻辑与设计稿 `renderVals()` 逐条对齐，文案一字未改：
  *   · 引证面板 p1–p5 展开/收起（金色为采用，灰色删除线为已废止被排除）
- *   · 申请弹层四步：gate → form / wait → done / done-wait
+ *   · 申请弹层三步：gate →（是）form → done ／（不是）wait＝终止页，不收信息
  *   · 短信验证码 60 秒倒计时
  *
  * 与设计稿的差异只有一处，是刻意的：提交改为真调后端。设计稿只在前端置成功
@@ -17,9 +17,6 @@
      后端就位后填真实路径即可，页面其余部分不用改。
      计划：POST /api/v1/beta-apply、/api/v1/beta-apply/sms、/api/v1/beta-apply/waitlist */
   var ENDPOINTS = window.DN_APPLY_ENDPOINTS || { apply: null, sms: null, waitlist: null };
-
-  /* 首批名额。改这里就改页面上所有出现「5–10 位」的地方（共 3 处）。 */
-  var BATCH = '5–10';
 
   /* 演示环境提示语。接上真短信网关后置 false。 */
   var DEMO_CODE = true;
@@ -56,7 +53,6 @@
     step: 'gate',
     panels: {},
     formErr: '',
-    waitErr: '',
     left: 0,          // 验证码倒计时剩余秒
     codeSent: false,
     phone: '',
@@ -69,13 +65,11 @@
   function vals() {
     var busy = state.left > 0;
     return {
-      batch: BATCH,
       applyOpen: state.applyOpen,
       stepGate: state.step === 'gate',
       stepWait: state.step === 'wait',
       stepForm: state.step === 'form',
       stepDone: state.step === 'done',
-      stepDoneWait: state.step === 'done-wait',
       codeBusy: busy,
       codeLabel: busy ? state.left + ' 秒后重发' : (state.codeSent ? '重新获取' : '获取验证码'),
       codeBtnStyle: busy ? CODE_OFF : CODE_ON,
@@ -84,7 +78,6 @@
       cmaxYesStyle: state.cmax === 'yes' ? PICK_ON : PICK_OFF,
       cmaxNoStyle: state.cmax === 'no' ? PICK_ON : PICK_OFF,
       formErr: state.formErr,
-      waitErr: state.waitErr,
       p1: !!state.panels.p1, p2: !!state.panels.p2, p3: !!state.panels.p3,
       p4: !!state.panels.p4, p5: !!state.panels.p5
     };
@@ -173,33 +166,17 @@
     }).then(function () { state.busy = false; render(); });
   }
 
-  function submitWait(e) {
-    e.preventDefault();
-    if (state.busy) return;
-    var el = e.target.querySelector('[name=phone]');
-    var p = el ? (el.value || '').trim() : '';
-    if (!phoneOk(p)) { state.waitErr = '请填写正确的 11 位手机号。'; return render(); }
-    state.waitErr = '';
-    state.busy = true; render();
-    post(ENDPOINTS.waitlist, { phone: p }).then(function () {
-      state.step = 'done-wait';
-    }).catch(function () {
-      state.waitErr = '提交没成功，稍后再试一次。';
-    }).then(function () { state.busy = false; render(); });
-  }
-
   var handlers = {
-    openApply: function () { state.applyOpen = true; state.step = 'gate'; state.formErr = ''; state.waitErr = ''; render(); },
+    openApply: function () { state.applyOpen = true; state.step = 'gate'; state.formErr = ''; render(); },
     closeApply: function () { state.applyOpen = false; render(); },
     stop: function (e) { e.stopPropagation(); },
     goForm: function () { state.step = 'form'; state.formErr = ''; render(); },
-    goWait: function () { state.step = 'wait'; state.waitErr = ''; render(); },
+    goWait: function () { state.step = 'wait'; render(); },
     onPhone: function (e) { state.phone = e.target.value.trim(); },
     pickCmaxYes: function () { state.cmax = 'yes'; state.formErr = ''; render(); },
     pickCmaxNo: function () { state.cmax = 'no'; state.formErr = ''; render(); },
     sendCode: sendCode,
     submitApply: submitApply,
-    submitWait: submitWait,
     toggleP1: function () { toggle('p1'); },
     toggleP2: function () { toggle('p2'); },
     toggleP3: function () { toggle('p3'); },

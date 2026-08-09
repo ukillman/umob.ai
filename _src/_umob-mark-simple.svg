@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- 小尺寸变体：只留「U + 一条轨道 + 星点」，笔画加粗。
+       双轨道和发光在 40px 以下必糊，标识系统里这本来就该有个简化版。 -->
+  <path d="M86 210C126 236 189 250 256 250C323 250 386 236 426 210" stroke="#D4A24C" stroke-opacity=".85" stroke-width="14" stroke-linecap="round"/>
+  <path d="M176 176V282" stroke="#E8BC6E" stroke-width="30" stroke-linecap="round"/>
+  <path d="M336 176V282" stroke="#E8BC6E" stroke-width="30" stroke-linecap="round"/>
+  <path d="M176 282C176 326.183 211.817 362 256 362C300.183 362 336 326.183 336 282" stroke="#E8BC6E" stroke-width="30" stroke-linecap="round"/>
+  <circle cx="378" cy="150" r="30" fill="#F0D3A0"/>
+</svg>
